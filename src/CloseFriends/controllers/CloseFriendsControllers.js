@@ -1,6 +1,10 @@
 const {
   CreateCloseFriendsService,
 } = require("../services/CreateCloseFriendsService");
+const { DeleteCloseFriendsService } = require("../services/DeleteCloseFriendsService");
+const {
+  EditCloseFrienddsService,
+} = require("../services/EditCloseFriendsService");
 
 const sideEnum = ["bride", "groom"];
 
@@ -37,6 +41,28 @@ const CreateCloseFriendsController = async (req, res) => {
   CreateCloseFriendsService(eventId, req.body, file, res);
 };
 
+// TODO: edit close friends controller
+const EditCloseFriendController = async (req, res) => {
+  const { friendId } = req.params;
+
+  let populateObj = [];
+  if (req.query.populate) {
+    populateObj = await populateFunctionality(req.query.populate);
+  }
+
+  EditCloseFrienddsService(friendId, req.file, req.body, populateObj, res);
+};
+
+// TODO: delete friend
+
+const DeleteCloseFriendsController = async (req, res) => {
+  const { friendId } = req.params;
+
+  DeleteCloseFriendsService(friendId, res);
+};
+
 module.exports = {
   CreateCloseFriendsController,
+  EditCloseFriendController,
+  DeleteCloseFriendsController,
 };

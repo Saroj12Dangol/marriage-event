@@ -32,6 +32,7 @@ const CreateDaysController = (req, res) => {
   CreateDaysService(req, eventId, file, res);
 };
 
+// TODO: edit day controller
 const EditDaysController = async (req, res) => {
   const { dayId } = req.params;
 
@@ -43,6 +44,7 @@ const EditDaysController = async (req, res) => {
   EditDaysService(dayId, req.file, req.body, populateObj, res);
 };
 
+// TODO: delete days
 const DeleteDaysController = async (req, res) => {
   const { dayId } = req.params;
 

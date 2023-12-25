@@ -7,11 +7,11 @@ const { populateFunctionality } = require("../../../utils/Populate");
 const {
   FetchCoupleByIdService,
 } = require("../services/FetchCoupleByIdService");
+const { EditCoupleService } = require("../services/EditCoupleServices");
+const { DeleteCoupleService } = require("../services/DeleteCoupleService");
 
 const CreateCoupleController = async (req, res) => {
   const { eventId } = req.params;
-
-  console.log(eventId);
   // TODO: data validation ===========
 
   // Check if all required fields are present
@@ -89,8 +89,24 @@ const FetchCoupleByIdController = async (req, res) => {
   FetchCoupleByIdService(coupleId, res, populateObj);
 };
 
+// TODO: edit couple
+
+const EditCoupleController = async (req, res) => {
+  const { coupleId } = req.params;
+  EditCoupleService(coupleId, req, res);
+};
+
+// TODO: delete couple
+
+const DeleteCoupleController = async (req, res) => {
+  const { coupleId } = req.params;
+  DeleteCoupleService(coupleId, res);
+};
+
 module.exports = {
   CreateCoupleController,
   FetchCoupleController,
   FetchCoupleByIdController,
+  EditCoupleController,
+  DeleteCoupleController,
 };

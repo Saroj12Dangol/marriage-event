@@ -60,6 +60,8 @@ const DeleteImageService = async (imageId, res, fromDeleteImage = true) => {
         }
       );
 
+      console.log(imageId, "image id");
+
       if (fromDeleteImage) {
         return res.status(200).json({
           message: "Image deleted successfully",

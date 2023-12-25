@@ -2,45 +2,51 @@ const { ImageUploadHandler } = require("../../../utils/ImageUploadHandler");
 const MediaModel = require("../../Media/model/MediaModel");
 const CoupleModel = require("../model/CoupleModel");
 
-const EditCoupleService = async (data, files, req, res, next) => {
+const EditCoupleService = async (coupleId, req, res) => {
   try {
-    // TODO: save to db
+    const updatedCouple = await CoupleModel.findOneAndUpdate(
+      { _id: coupleId },
+      { $set: req.body },
+      { new: true }
+    );
 
-    const couple = new CoupleModel(data);
-
-    const newCouple = await couple.save();
-
-    let brideImages = [];
-    let groomImages = [];
-
-    for (const image of files.files.brideImages) {
-      const img = await ImageUploadHandler(image, res);
-      const imageResponse = new MediaModel({
-        image: img,
+    if (!updatedCouple) {
+      return res.status(404).json({
+        message: `${coupleId} not found`,
       });
-      imageResponse.save();
-      brideImages.push(imageResponse._id);
     }
 
-    for (const image of files.files.groomImages) {
-      const img = await ImageUploadHandler(image, res);
-      const imageResponse = new MediaModel({
-        image: img,
-      });
-      imageResponse.save();
-      groomImages.push(imageResponse._id);
+    if (req.files.brideImages) {
+      for (const image of req.files.brideImages) {
+        const img = await ImageUploadHandler(image, res);
+        const imageResponse = new MediaModel({
+          image: img,
+        });
+
+        await imageResponse.save();
+        updatedCouple.brideImages.push(imageResponse._id);
+      }
     }
 
-    newCouple.brideImages = brideImages;
-    newCouple.groomImages = groomImages;
+    if (req.files.groomImages) {
+      for (const image of req.files.groomImages) {
+        const img = await ImageUploadHandler(image, res);
+        const imageResponse = new MediaModel({
+          image: img,
+        });
+        imageResponse.save();
+        updatedCouple.groomImages.push(imageResponse._id);
+      }
+    }
 
-    await newCouple.save();
+    await updatedCouple.save();
 
-    const populatedCouple = await CoupleModel.findById(newCouple._id)
-      .populate("brideImages")
-      .populate("groomImages");
+    const couple = await CoupleModel.findById(coupleId)
+      .populate("groomImages")
+      .populate("brideImages");
+
     return res.status(200).json({
-      data: populatedCouple,
+      data: couple,
     });
   } catch (error) {
     return res.status(500).json({

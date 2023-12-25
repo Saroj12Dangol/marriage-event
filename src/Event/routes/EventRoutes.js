@@ -7,9 +7,7 @@ const {
   addAgencyToEventController,
   FetchEventByIdController,
 } = require("../controllers/EventController");
-const {
-  CreateCoupleControllerDuringEvent,
-} = require("../../Couple/controllers/CoupleController");
+
 const IsAdmin = require("../../../middlewares/AdminProtect");
 
 const EventRouter = express.Router();
