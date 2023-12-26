@@ -6,6 +6,7 @@ const {
   FetchEventController,
   addAgencyToEventController,
   FetchEventByIdController,
+  EditEventController,
 } = require("../controllers/EventController");
 
 const IsAdmin = require("../../../middlewares/AdminProtect");
@@ -37,6 +38,17 @@ EventRouter.get("/detail/:eventId", IsAdmin, FetchEventByIdController);
 // TODO: add agency to event
 
 EventRouter.patch("/add/agency/:eventId", IsAdmin, addAgencyToEventController);
+
+// ===========
+
+// TODO: edit  event basic info
+
+EventRouter.put(
+  "/:eventId",
+  IsAdmin,
+  upload.fields([{ name: "backgrounds" }]),
+  EditEventController
+);
 
 // ===========
 

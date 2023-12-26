@@ -13,12 +13,12 @@ const CreateDaysService = async (req, eventId, file, res) => {
       });
     }
 
-    const day = new DaysModel(req.body);
-
     const img = await ImageUploadHandler(file, res);
     const imageResponse = new MediaModel({
       image: img,
     });
+
+    const day = new DaysModel(req.body);
 
     day.image = imageResponse._id;
 

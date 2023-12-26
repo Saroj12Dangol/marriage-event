@@ -1,22 +1,30 @@
-const { Queue } = require("bullmq");
 const { SendEmail } = require("../../../utils/Email");
 const Notification = require("../model/NotificationModel");
-const GuestModel = require("../../Guest/model/GuestModel");
 const EventModel = require("../../Event/model/EventModel");
 
 const SendEmailService = async ({
   subject,
   text,
   purpose,
-  query,
   res,
   to,
   event,
+  query,
+  days,
 }) => {
   try {
     // TODO: fetch the emails of users to send email
 
-    const eventGuests = await EventModel.findById(event).populate("guests");
+    // const eventGuests = await EventModel.findById(event).populate("guests");
+
+    const eventGuests = await EventModel.findById(event).populate({
+      path: "guests",
+      match: query, // Filtering condition
+    });
+
+    // return res.json({
+    //   data: eventGuests,
+    // });
 
     let emails = [];
 
@@ -29,7 +37,16 @@ const SendEmailService = async ({
       emails = eventGuests.guests.map((g) => g.email);
     }
 
-    SendEmail(emails, subject, text);
+    SendEmail(
+      emails,
+      subject,
+      text,
+      purpose,
+      event,
+      days,
+      eventGuests.title,
+      res
+    );
 
     emails.forEach(async (email) => {
       const notification = new Notification({

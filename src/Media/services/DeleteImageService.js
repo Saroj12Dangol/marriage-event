@@ -3,6 +3,7 @@ const CoupleModel = require("../../Couple/model/CoupleModel");
 const DaysModel = require("../../Days/model/DaysModel");
 const EventModel = require("../../Event/model/EventModel");
 const LoveStoryModel = require("../../LoveStory/model/LoveStoryModel");
+const MemoriesModel = require("../../Memories/model/MemoriesModel");
 const TravelDetailModel = require("../../TravelDetails/model/TravelDetailModel");
 const MediaModel = require("../model/MediaModel");
 
@@ -60,7 +61,10 @@ const DeleteImageService = async (imageId, res, fromDeleteImage = true) => {
         }
       );
 
-      console.log(imageId, "image id");
+      await MemoriesModel.updateMany(
+        { $or: [{ images: imageId }] },
+        { $pull: { images: imageId } }
+      );
 
       if (fromDeleteImage) {
         return res.status(200).json({
@@ -69,9 +73,7 @@ const DeleteImageService = async (imageId, res, fromDeleteImage = true) => {
       }
     }
   } catch (error) {
-    return res.status(500).json({
-      message: error.message,
-    });
+    throw new Error(error.message);
   }
 };
 

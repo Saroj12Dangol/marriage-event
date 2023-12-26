@@ -13,12 +13,12 @@ const CreateLoveStoryService = async (req, eventId, file, res) => {
       });
     }
 
-    const loveStory = new LoveStoryModel(req.body);
-
     const img = await ImageUploadHandler(file, res);
     const imageResponse = new MediaModel({
       image: img,
     });
+
+    const loveStory = new LoveStoryModel(req.body);
 
     loveStory.image = imageResponse._id;
 

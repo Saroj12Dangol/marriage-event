@@ -5,7 +5,6 @@ const cloudinary = require("cloudinary").v2;
 
 const ImageUploadHandler = async (file, res) => {
   let fileDataImage = {};
-
   if (file) {
     let uploadedFile;
     try {
@@ -13,20 +12,20 @@ const ImageUploadHandler = async (file, res) => {
         folder: "events/",
         resource_type: "image",
       });
-    } catch (error) {
-      res.status(400).json({ error });
-    }
 
-    fileDataImage = {
-      fileName: file.originalname,
-      fileUrl: uploadedFile.secure_url,
-      fileType: file.mimetype,
-      fileSize: fileSizeFormatter(file.size, 2),
-    };
+      fileDataImage = {
+        fileName: file.originalname,
+        fileUrl: uploadedFile.secure_url,
+        fileType: file.mimetype,
+        fileSize: fileSizeFormatter(file.size, 2),
+      };
+    } catch (error) {
+      throw new Error(error.message);
+    }
 
     return fileDataImage;
   } else {
-    return null;
+    throw new Error("Internal server error");
   }
 };
 

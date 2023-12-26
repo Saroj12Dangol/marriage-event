@@ -15,10 +15,6 @@ const CreateCoupleService = async (data, files, eventId, res) => {
       });
     }
 
-    const couple = new CoupleModel(data);
-
-    const newCouple = await couple.save();
-
     let brideImages = [];
     let groomImages = [];
 
@@ -40,6 +36,10 @@ const CreateCoupleService = async (data, files, eventId, res) => {
       imageResponse.save();
       groomImages.push(imageResponse._id);
     }
+
+    const couple = new CoupleModel(data);
+
+    const newCouple = await couple.save();
 
     newCouple.brideImages = brideImages;
     newCouple.groomImages = groomImages;

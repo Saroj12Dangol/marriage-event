@@ -21,7 +21,7 @@ const EventSchema = mongoose.Schema(
       type: String,
     },
 
-    place: {
+    venue: {
       type: String,
     },
 
@@ -43,7 +43,8 @@ const EventSchema = mongoose.Schema(
       ref: "Couple",
     },
 
-    guests: { //complete crud
+    guests: {
+      //complete crud
       type: [mongoose.Schema.ObjectId],
       ref: "Guest",
       default: function () {
@@ -70,7 +71,8 @@ const EventSchema = mongoose.Schema(
       ref: "Agency",
     },
 
-    days: { //complete crud
+    days: {
+      //complete crud
       type: [mongoose.Schema.ObjectId],
       ref: "Days",
       default: function () {
@@ -78,7 +80,17 @@ const EventSchema = mongoose.Schema(
       },
     },
 
-    loveStory: { //complete crud
+    memories: {
+      //complete crud
+      type: [mongoose.Schema.ObjectId],
+      ref: "Memories",
+      default: function () {
+        return [];
+      },
+    },
+
+    loveStory: {
+      //complete crud
       type: [mongoose.Schema.ObjectId],
       ref: "LoveStory",
       default: function () {
