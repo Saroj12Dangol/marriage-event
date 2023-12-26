@@ -27,6 +27,11 @@ const AgencySchema = mongoose.Schema(
     token: {
       type: String,
     },
+
+    event: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Event",
+    },
   },
   {
     timestamps: true,

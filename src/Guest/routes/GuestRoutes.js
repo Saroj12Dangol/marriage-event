@@ -5,6 +5,8 @@ const {
   EditGuestController,
   ToggleGuestEventStatusController,
   DeleteGuestController,
+  CreateGuestInBulkController,
+  AllocationRoomController,
 } = require("../controllers/GuestController");
 const IsAdmin = require("../../../middlewares/AdminProtect");
 
@@ -18,6 +20,16 @@ GuestRouter.post("/", IsAdmin, CreateGuestController);
 // TODO: add guests to event
 
 GuestRouter.post("/add-to-event/:eventId", IsAdmin, CreateGuestController);
+
+// ===========
+
+// TODO: add guests to event in bulk
+
+GuestRouter.post(
+  "/add-to-event/bulk/:eventId",
+  IsAdmin,
+  CreateGuestInBulkController
+);
 
 // ===========
 
@@ -46,6 +58,8 @@ GuestRouter.patch(
   "/toggle-travel-status/:guestId",
   ToggleGuestEventStatusController
 );
+
+GuestRouter.patch("/add-room/:guestId", AllocationRoomController);
 
 // ===========
 

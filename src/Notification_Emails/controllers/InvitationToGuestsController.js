@@ -6,18 +6,17 @@ const { SendEmailService } = require("../services/InvitationToGuestsService");
 const SendEmailController = (req, res) => {
   const { travelStatus, eventStatus } = req.query;
 
-  const requiredFields = ["subject", "text", "purpose", "to"];
+  const requiredFields = ["subject", "text", "purpose", "to", "event"];
 
   const missingFields = requiredFields.filter((field) => !req.body[field]);
 
   if (missingFields.length > 0) {
     return res.status(400).json({
-      success: false,
       error: `Missing required fields: ${missingFields.join(", ")}`,
     });
   }
 
-  const { to, subject, text, purpose } = req.body;
+  const { to, subject, text, purpose, event } = req.body;
 
   // Build the query based on the defined eventStatus and travelStatus
   const query = {};
@@ -35,6 +34,7 @@ const SendEmailController = (req, res) => {
     purpose,
     query,
     res,
+    event,
   });
 };
 

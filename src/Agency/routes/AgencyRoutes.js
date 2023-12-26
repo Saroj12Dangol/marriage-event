@@ -4,14 +4,20 @@ const {
   fetchAgencyController,
   EditAgencyController,
   DeleteAgencyController,
+  createAgencyFronEventController,
 } = require("../controllers/AgencyController");
 const IsAdmin = require("../../../middlewares/AdminProtect");
 
 const AgencyRouter = express.Router();
 
-// TODO: post agency controller============
+// TODO: post agency from event controller============
 
-AgencyRouter.post("/:eventId", IsAdmin, createAgencyController);
+AgencyRouter.post("/:eventId", IsAdmin, createAgencyFronEventController);
+// =========
+
+// TODO: post agency independent of event controller============
+
+AgencyRouter.post("/", IsAdmin, createAgencyController);
 // =========
 
 // TODO: get agency controller

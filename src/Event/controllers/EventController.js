@@ -1,5 +1,6 @@
 // TODO: create Bride's profile
 
+const { page, limit } = require("../../../constants/paginationConstants");
 const { populateFunctionality } = require("../../../utils/Populate");
 const {
   AddAgencyToEventService,
@@ -40,7 +41,13 @@ const FetchEventController = async (req, res) => {
   if (req.query.populate) {
     populateObj = await populateFunctionality(req.query.populate);
   }
-  FetchEventService(req, res, populateObj);
+
+  const pg = parseInt(req.query.page) || page;
+  const lmt = parseInt(req.query.limit) || limit;
+
+  const skip = (page - 1) * limit;
+
+  FetchEventService(res, populateObj, pg, lmt, skip);
 };
 
 // TODO: fetch event detail

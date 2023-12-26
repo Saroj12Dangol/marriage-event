@@ -1,9 +1,12 @@
+const {
+  CreateAgencyServiceFromEventService,
+} = require("../services/CreateAgencyFromEventService");
 const { CreateAgencyService } = require("../services/CreateAgencyService");
 const { DeleteAgencyService } = require("../services/DeleteAgencyService");
 const { EditAgencyService } = require("../services/EditAgencyService");
 const { fetchAgencyService } = require("../services/FetchAgencyService");
 
-const createAgencyController = async (req, res) => {
+const createAgencyFronEventController = async (req, res) => {
   const { eventId } = req.params;
 
   // TODO: data validation ===========
@@ -21,7 +24,26 @@ const createAgencyController = async (req, res) => {
 
   // TODO: ==========\
 
-  CreateAgencyService(req, eventId, res);
+  CreateAgencyServiceFromEventService(req, eventId, res);
+};
+
+const createAgencyController = async (req, res) => {
+  // TODO: data validation ===========
+  // Check if all required fields are present
+  const requiredFields = ["name", "email", "phone", "address"];
+
+  const missingFields = requiredFields.filter((field) => !req.body[field]);
+
+  if (missingFields.length > 0) {
+    return res.status(400).json({
+      success: false,
+      error: `Missing required fields: ${missingFields.join(", ")}`,
+    });
+  }
+
+  // TODO: ==========\
+
+  CreateAgencyService(req, res);
 };
 
 // TODO: agency edit controller
@@ -51,8 +73,9 @@ const DeleteAgencyController = async (req, res) => {
 // TODO: ==============
 
 module.exports = {
-  createAgencyController,
+  createAgencyFronEventController,
   fetchAgencyController,
   EditAgencyController,
   DeleteAgencyController,
+  createAgencyController,
 };

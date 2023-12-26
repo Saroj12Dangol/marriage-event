@@ -1,7 +1,13 @@
 const mongoose = require("mongoose");
 
 const eventStatusEnum = ["accept", "reject", "pending"];
-const travelStatusEnum = ["asked", "received", "accommodation", "pending"];
+const travelStatusEnum = [
+  "asked",
+  "received",
+  "roomAssigned",
+  "accommodation",
+  "pending",
+];
 
 const GuestSchema = mongoose.Schema(
   {
@@ -24,6 +30,14 @@ const GuestSchema = mongoose.Schema(
     role: {
       type: String,
       default: "guest",
+    },
+
+    room: {
+      type: String,
+    },
+
+    hotel: {
+      type: String,
     },
 
     eventStatus: {

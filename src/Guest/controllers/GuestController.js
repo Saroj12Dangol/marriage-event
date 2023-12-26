@@ -1,13 +1,19 @@
+const {
+  CreateGuestInBulkService,
+} = require("../services/CreateGuestInBulkService");
 const { CreateGuestService } = require("../services/CreateGuestService");
 const { DeleteGuestService } = require("../services/DeleteGuestService");
 const { EditGuestService } = require("../services/EditGuestService");
 const { FetchGuestService } = require("../services/FetchGuestService");
+const { RoomAssignService } = require("../services/RoomAssignService");
 const {
   ToggleGuestEventStatusService,
   ToggleGuestTravelStatusService,
 } = require("../services/ToggleGuestStatusService");
 
 const statusFields = ["accept", "reject", "pending"];
+
+// TODO: create guest
 
 const CreateGuestController = async (req, res) => {
   const { eventId } = req.params;
@@ -27,6 +33,14 @@ const CreateGuestController = async (req, res) => {
   // TODO: ==========\
 
   CreateGuestService(req, eventId, res);
+};
+
+// TODO: create guest in bulk
+const CreateGuestInBulkController = async (req, res) => {
+  const { eventId } = req.params;
+  // TODO: ==========\
+
+  CreateGuestInBulkService(req, eventId, res);
 };
 
 // TODO: fetch guest
@@ -76,6 +90,33 @@ const ToggleGuestEventStatusController = async (req, res) => {
 
 // TODO: toggle status
 
+const AllocationRoomController = async (req, res) => {
+  const { guestId } = req.params;
+
+  // TODO: data validation ===========
+  // Check if all required fields are present
+  const requiredFields = ["roomNo", "hotel"];
+
+  const missingFields = requiredFields.filter((field) => !req.body[field]);
+
+  if (missingFields.length > 0) {
+    return res.status(400).json({
+      success: false,
+      error: `Missing required fields: ${missingFields.join(", ")}`,
+    });
+  }
+
+  const { roomNo, hotel } = req.body;
+
+  RoomAssignService(
+    guestId,
+    { roomNo, hotel, travelStatus: "roomAssigned" },
+    res
+  );
+};
+
+// TODO: toggle status
+
 const ToggleGuestTravelStatusController = async (req, res) => {
   const { status } = req.body;
 
@@ -97,4 +138,6 @@ module.exports = {
   ToggleGuestEventStatusController,
   ToggleGuestTravelStatusController,
   DeleteGuestController,
+  CreateGuestInBulkController,
+  AllocationRoomController,
 };
