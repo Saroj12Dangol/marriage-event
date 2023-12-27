@@ -1,4 +1,5 @@
 const { CreateTeamService } = require("../services/CreateTeamService");
+const { DeleteTeamService } = require("../services/DeleteTeamService");
 const { EditTeamService } = require("../services/EditTeamService");
 const { FetchTeamByIdService } = require("../services/FetchTeamByIdService");
 const { FetchTeamService } = require("../services/FetchTeamService");
@@ -59,7 +60,6 @@ const fetchTeamController = async (req, res) => {
 
 const EditTeamController = async (req, res) => {
   const { teamId } = req.params;
-
   EditTeamService(teamId, req, res);
 };
 
@@ -104,7 +104,7 @@ const FetchTeamByIdController = async (req, res) => {
 
 const DeleteTeamController = async (req, res) => {
   const { teamId } = req.params;
-  DeleteTeam(teamId, res);
+  DeleteTeamService(teamId, res);
 };
 
 module.exports = {

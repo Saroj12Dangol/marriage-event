@@ -1,29 +1,18 @@
-const EventModel = require("../../Event/model/EventModel");
-const AgencyModel = require("../model/AgencyModel");
+const TeamModel = require("../model/TeamModel");
 
 const DeleteTeamService = async (teamId, res) => {
   try {
-    const agency = await AgencyModel.findById(teamId);
-    if (!agency) {
+    const team = await TeamModel.findById(teamId);
+    if (!team) {
       return res.status(200).json({
-        message: `${teamId} agency is not found`,
+        message: `${teamId} team is not found`,
       });
     }
 
-    await AgencyModel.deleteOne({ _id: teamId });
-
-    // Remove references from event Model
-    await EventModel.updateMany(
-      { $or: [{ agency: teamId }] },
-      {
-        $unset: {
-          agency: "",
-        },
-      }
-    );
+    await TeamModel.deleteOne({ _id: teamId });
 
     return res.status(200).json({
-      message: `${teamId} agency is deleted`,
+      message: `${teamId} team is deleted`,
     });
   } catch (error) {
     return res.status(500).json({
