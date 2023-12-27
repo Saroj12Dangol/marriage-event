@@ -5,6 +5,8 @@ const {
   LoginTeamController,
   GetLoggedInUserController,
   FetchTeamByIdController,
+  DeleteTeamController,
+  EditTeamController,
 } = require("../controllers/TeamController");
 const IsAdmin = require("../../../middlewares/AdminProtect");
 const {
@@ -26,7 +28,7 @@ TeamRouter.get("/", IsAdmin, fetchTeamController);
 
 // TODO: get team controller
 
-TeamRouter.put("/:teamId", IsAdmin, EditGuestController);
+TeamRouter.put("/:teamId", IsAdmin, EditTeamController);
 
 // ===========
 
@@ -47,7 +49,7 @@ TeamRouter.get("/getloggedinuser", GetLoggedInUserController);
 TeamRouter.get("/detail/:teamId", IsAdmin, FetchTeamByIdController);
 // ===========
 
-// TODO: delete agency controller
-// AgencyRouter.delete("/:agencyId", IsAdmin, DeleteAgencyController);
+// TODO: delete team controller
+TeamRouter.delete("/:teamId", IsAdmin, DeleteTeamController);
 
 module.exports = { TeamRouter };

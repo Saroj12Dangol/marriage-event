@@ -100,6 +100,13 @@ const FetchTeamByIdController = async (req, res) => {
   FetchTeamByIdService(teamId, res, populateObj);
 };
 
+// TODO: agency edit controller
+
+const DeleteTeamController = async (req, res) => {
+  const { teamId } = req.params;
+  DeleteTeam(teamId, res);
+};
+
 module.exports = {
   CreateTeamController,
   fetchTeamController,
@@ -107,4 +114,5 @@ module.exports = {
   GetLoggedInUserController,
   EditTeamController,
   FetchTeamByIdController,
+  DeleteTeamController,
 };
