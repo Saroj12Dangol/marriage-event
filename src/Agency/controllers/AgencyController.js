@@ -4,6 +4,9 @@ const {
 const { CreateAgencyService } = require("../services/CreateAgencyService");
 const { DeleteAgencyService } = require("../services/DeleteAgencyService");
 const { EditAgencyService } = require("../services/EditAgencyService");
+const {
+  FetchAgencyByIdService,
+} = require("../services/FetchAgencyByIdService");
 const { fetchAgencyService } = require("../services/FetchAgencyService");
 
 const createAgencyFronEventController = async (req, res) => {
@@ -72,10 +75,25 @@ const DeleteAgencyController = async (req, res) => {
 
 // TODO: ==============
 
+// TODO: ==============
+
+const FetchAgencyByIdController = async (req, res) => {
+  const { agencyId } = req.params;
+
+  let populateObj = [];
+  if (req.query.populate) {
+    populateObj = await populateFunctionality(req.query.populate);
+  }
+  FetchAgencyByIdService(agencyId, res, populateObj);
+};
+
+// TODO: ==============
+
 module.exports = {
   createAgencyFronEventController,
   fetchAgencyController,
   EditAgencyController,
   DeleteAgencyController,
   createAgencyController,
+  FetchAgencyByIdController,
 };

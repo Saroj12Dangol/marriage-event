@@ -34,6 +34,7 @@ const {
   CloseFriendsRouter,
 } = require("./src/CloseFriends/routes/CloseFriendsRoutes");
 const { LoveStoryRouter } = require("./src/LoveStory/routes/LoveStoryRoutes");
+const { TravelRouter } = require("./src/TravelDetails/routes/TravelDetailRoutes");
 
 // ==============
 
@@ -80,6 +81,7 @@ app.use("/v1/notification", EmailRouter);
 app.use("/v1/days", DaysRouter);
 app.use("/v1/love-story", LoveStoryRouter);
 app.use("/v1/friends", CloseFriendsRouter);
+app.use("/v1/travel", TravelRouter);
 
 app.get("/v1", (req, res) => {
   res.send("Welcome to marriage event management");

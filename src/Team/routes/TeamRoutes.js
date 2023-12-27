@@ -47,4 +47,7 @@ TeamRouter.get("/getloggedinuser", GetLoggedInUserController);
 TeamRouter.get("/detail/:teamId", IsAdmin, FetchTeamByIdController);
 // ===========
 
+// TODO: delete agency controller
+// AgencyRouter.delete("/:agencyId", IsAdmin, DeleteAgencyController);
+
 module.exports = { TeamRouter };

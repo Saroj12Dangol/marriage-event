@@ -1,13 +1,5 @@
 const mongoose = require("mongoose");
-
-const forEnum = ["Guest", "Agency", "Admin"];
-const purposeEnum = [
-  "invitation",
-  "ask-travel-detail",
-  "travel-agency",
-  "accommodatation",
-  "days-information",
-];
+const { purposeEnum, forEnum } = require("../../../constants/enums");
 
 const NotificationSchema = mongoose.Schema(
   {

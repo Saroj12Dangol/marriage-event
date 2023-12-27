@@ -1,5 +1,7 @@
 const eventStatusEnum = ["accept", "pending"];
 
+const forEnum = ["Guest", "Agency", "Admin"];
+
 const travelStatusEnum = [
   "travel-detail-asked",
   "travel-detail-received",
@@ -22,4 +24,10 @@ const purposeEnum = [
   "days-information",
 ];
 
-module.exports = { eventStatusEnum, travelStatusEnum, statusEnum, purposeEnum };
+module.exports = {
+  eventStatusEnum,
+  travelStatusEnum,
+  statusEnum,
+  purposeEnum,
+  forEnum,
+};

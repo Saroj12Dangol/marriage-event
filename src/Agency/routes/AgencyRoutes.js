@@ -5,6 +5,7 @@ const {
   EditAgencyController,
   DeleteAgencyController,
   createAgencyFronEventController,
+  FetchAgencyByIdController,
 } = require("../controllers/AgencyController");
 const IsAdmin = require("../../../middlewares/AdminProtect");
 
@@ -33,6 +34,11 @@ AgencyRouter.put("/:agencyId", IsAdmin, EditAgencyController);
 // TODO: delete agency controller
 AgencyRouter.delete("/:agencyId", IsAdmin, DeleteAgencyController);
 
+// ===========
+
+// TODO: get agency detail Router
+
+AgencyRouter.get("/detail/:agencyId", IsAdmin, FetchAgencyByIdController);
 // ===========
 
 module.exports = { AgencyRouter };
