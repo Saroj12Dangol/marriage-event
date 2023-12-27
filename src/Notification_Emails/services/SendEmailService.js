@@ -11,6 +11,7 @@ const {
 } = require("../../../constants/statuses");
 const { SendEmail } = require("../../../utils/Email");
 const EventModel = require("../../Event/model/EventModel");
+const NotificationModel = require("../model/NotificationModel");
 const { GetDaysInfoOfEventService } = require("./GetDaysInfoOfEventService");
 
 const SendEmailService = async (purpose, eventId, res) => {
@@ -53,7 +54,7 @@ const SendEmailService = async (purpose, eventId, res) => {
       });
 
       emails.forEach(async (email) => {
-        const notification = new Notification({
+        const notification = new NotificationModel({
           toEmail: email,
           subject:
             purpose === "invitation"
@@ -111,7 +112,7 @@ const SendEmailService = async (purpose, eventId, res) => {
       });
 
       emails.forEach(async (email) => {
-        const notification = new Notification({
+        const notification = new NotificationModel({
           toEmail: email,
           subject: AskTravelDetail.subject,
           body: AskTravelDetail.text,
@@ -160,7 +161,7 @@ const SendEmailService = async (purpose, eventId, res) => {
       });
 
       emails.forEach(async (email) => {
-        const notification = new Notification({
+        const notification = new NotificationModel({
           toEmail: email,
           subject: AskTravelDetail.subject,
           body: AskTravelDetail.text,
