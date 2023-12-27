@@ -1,15 +1,7 @@
 const mongoose = require("mongoose");
+const { eventStatusEnum, travelStatusEnum } = require("../../../constants/enums");
 
-const eventStatusEnum = ["accept", "pending"];
-const travelStatusEnum = [
-  "travel-detail-asked",
-  "travel-detail-received",
-  "asked-to-agent",
-  "received",
-  "roomAssigned",
-  "days-information",
-  "pending",
-];
+
 
 const GuestSchema = mongoose.Schema(
   {

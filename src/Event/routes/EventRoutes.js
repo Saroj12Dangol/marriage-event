@@ -7,6 +7,7 @@ const {
   addAgencyToEventController,
   FetchEventByIdController,
   EditEventController,
+  DeleteEventController,
 } = require("../controllers/EventController");
 
 const IsAdmin = require("../../../middlewares/AdminProtect");
@@ -49,6 +50,12 @@ EventRouter.put(
   upload.fields([{ name: "backgrounds" }]),
   EditEventController
 );
+
+// ===========
+
+// TODO: delete event basic info
+
+EventRouter.delete("/:eventId", IsAdmin, DeleteEventController);
 
 // ===========
 

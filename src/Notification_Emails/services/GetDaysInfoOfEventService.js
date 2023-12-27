@@ -1,6 +1,6 @@
 const EventModel = require("../../Event/model/EventModel");
 
-const GetDaysInfoOfEventService = async (eventId, res) => {
+const GetDaysInfoOfEventService = async (eventId) => {
   try {
     const event = await EventModel.findById(eventId)
       .populate("days")
@@ -20,9 +20,7 @@ const GetDaysInfoOfEventService = async (eventId, res) => {
       return event;
     }
   } catch (error) {
-    return res.status(500).json({
-      message: error.message + "fadsfsd",
-    });
+    throw new Error(error.message);
   }
 };
 

@@ -12,7 +12,7 @@ const {
   RoomBookedTemplate,
 } = require("../constants/emailTemplates/RoomBookedTemplate");
 
-const SendEmail = async (
+const SendEmail = async ({
   emails,
   subject,
   text,
@@ -20,11 +20,9 @@ const SendEmail = async (
   eventId,
   days,
   eventTitle,
-  res,
   hotel,
-  room
-) => {
-  console.log({ emails, subject, text, purpose, eventId, days, eventTitle });
+  room,
+}) => {
   var mail_transport_mail_transport = mailer.createTransport({
     host: process.env.EMAIL_HOST,
     auth: {

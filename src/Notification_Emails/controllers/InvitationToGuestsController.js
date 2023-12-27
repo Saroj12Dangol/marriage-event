@@ -1,3 +1,4 @@
+const { purposeEnum } = require("../../../constants/enums");
 const {
   AccommodatationEmailService,
 } = require("../services/AccommodatationEmailService");
@@ -10,58 +11,51 @@ const {
 const {
   IndividualEmailsService,
 } = require("../services/IndividualEmailsService");
-const { SendEmailService } = require("../services/SendBulkEmailService");
-
-const purposeEnum = [
-  "invitation",
-  "agency",
-  "accommodatation",
-  "days-information",
-];
+const { SendEmailService } = require("../services/SendEmailService");
 
 // TODO: email controller
 
-const SendEmailController = async (req, res) => {
-  const { travelStatus, eventStatus } = req.query;
+// const SendEmailController = async (req, res) => {
+//   const { travelStatus, eventStatus } = req.query;
 
-  const requiredFields = ["subject", "text", "purpose", "to", "event"];
+//   const requiredFields = ["subject", "text", "purpose", "to", "event"];
 
-  const missingFields = requiredFields.filter((field) => !req.body[field]);
+//   const missingFields = requiredFields.filter((field) => !req.body[field]);
 
-  if (missingFields.length > 0) {
-    return res.status(400).json({
-      error: `Missing required fields: ${missingFields.join(", ")}`,
-    });
-  }
+//   if (missingFields.length > 0) {
+//     return res.status(400).json({
+//       error: `Missing required fields: ${missingFields.join(", ")}`,
+//     });
+//   }
 
-  const { to, subject, text, purpose, event } = req.body;
+//   const { to, subject, text, purpose, event } = req.body;
 
-  // TODO: Build the query based on the defined eventStatus and travelStatus
-  const query = {};
-  if (eventStatus !== undefined) {
-    query.eventStatus = eventStatus;
-  }
-  if (travelStatus !== undefined) {
-    query.travelStatus = travelStatus;
-  }
+//   // TODO: Build the query based on the defined eventStatus and travelStatus
+//   const query = {};
+//   if (eventStatus !== undefined) {
+//     query.eventStatus = eventStatus;
+//   }
+//   if (travelStatus !== undefined) {
+//     query.travelStatus = travelStatus;
+//   }
 
-  if (!purposeEnum.includes(purpose)) {
-    return res.status(400).json({
-      message: `${purpose} is not valid: should be ${purposeEnum}`,
-    });
-  }
+//   if (!purposeEnum.includes(purpose)) {
+//     return res.status(400).json({
+//       message: `${purpose} is not valid: should be ${purposeEnum}`,
+//     });
+//   }
 
-  await SendEmailService({
-    to,
-    subject,
-    text,
-    purpose,
-    query,
-    res,
-    event,
-    query,
-  });
-};
+//   await SendEmailService({
+//     to,
+//     subject,
+//     text,
+//     purpose,
+//     query,
+//     res,
+//     event,
+//     query,
+//   });
+// };
 
 // TODO:
 const SendDaysInfoEmailController = async (req, res) => {
@@ -187,6 +181,19 @@ const SendDayInfoEmailIndividualController = async (req, res) => {
     emails,
     days,
   });
+};
+
+const SendEmailController = async (req, res) => {
+  const { purpose } = req.body;
+
+  const { eventId } = req.params;
+
+  if (!purposeEnum.includes(purpose)) {
+    return res.status(400).json({
+      message: `${purpose} is not valid: should be ${purposeEnum}`,
+    });
+  }
+  SendEmailService(purpose, eventId, res);
 };
 
 module.exports = {

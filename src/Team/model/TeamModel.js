@@ -27,7 +27,6 @@ const TeamSchema = mongoose.Schema(
 
     role: {
       type: String,
-      enum: ["admin", "agency"],
       default: "admin",
     },
 

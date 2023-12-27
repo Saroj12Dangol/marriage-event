@@ -15,10 +15,12 @@ const CloseFriendsSchema = mongoose.Schema(
 
     fbLink: {
       type: String,
+      default: "",
     },
 
     instaLink: {
       type: String,
+      default: "",
     },
 
     side: {

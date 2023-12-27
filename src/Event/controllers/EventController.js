@@ -6,6 +6,7 @@ const {
   AddAgencyToEventService,
 } = require("../services/AddAgencyToEventService");
 const { CreateEventService } = require("../services/CreateEventService");
+const { DeleteEventService } = require("../services/DeleteEventService");
 const { EditEventService } = require("../services/EditEventService");
 const { FetchEventByIdService } = require("../services/FetchEventByIdService");
 const { FetchEventService } = require("../services/FetchEventService");
@@ -71,10 +72,17 @@ const addAgencyToEventController = async (req, res) => {
   AddAgencyToEventService(agencyId, eventId, res);
 };
 
-// TODO: add agency to controller
+// TODO: edit event  controller
 const EditEventController = async (req, res) => {
   const { eventId } = req.params;
   EditEventService(eventId, req, res);
+};
+
+// TODO: delete event controller
+const DeleteEventController = async (req, res) => {
+  const { eventId } = req.params;
+
+  DeleteEventService(eventId, res);
 };
 
 module.exports = {
@@ -83,4 +91,5 @@ module.exports = {
   addAgencyToEventController,
   FetchEventByIdController,
   EditEventController,
+  DeleteEventController,
 };
