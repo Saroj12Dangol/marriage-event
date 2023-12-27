@@ -37,10 +37,10 @@ const EventSchema = mongoose.Schema(
       type: Number,
     },
 
-    couple: {
-      type: mongoose.Schema.ObjectId,
-      ref: "Couple",
-    },
+    // couple: {
+    //   type: mongoose.Schema.ObjectId,
+    //   ref: "Couple",
+    // },
 
     guests: {
       //complete crud
@@ -51,13 +51,13 @@ const EventSchema = mongoose.Schema(
       },
     },
 
-    closeFriends: {
-      type: [mongoose.Schema.ObjectId],
-      ref: "CloseFriends",
-      default: function () {
-        return [];
-      },
-    },
+    // closeFriends: {
+    //   type: [mongoose.Schema.ObjectId],
+    //   ref: "CloseFriends",
+    //   default: function () {
+    //     return [];
+    //   },
+    // },
 
     status: {
       type: String,
@@ -88,46 +88,19 @@ const EventSchema = mongoose.Schema(
       },
     },
 
-    loveStory: {
-      //complete crud
-      type: [mongoose.Schema.ObjectId],
-      ref: "LoveStory",
-      default: function () {
-        return [];
-      },
-    },
+    // loveStory: {
+    //   //complete crud
+    //   type: [mongoose.Schema.ObjectId],
+    //   ref: "LoveStory",
+    //   default: function () {
+    //     return [];
+    //   },
+    // },
   },
   {
     timestamps: true,
   }
 );
-
-// Hook to remove referenced documents before removing the Event
-EventSchema.pre("deleteOne", async function (next) {
-  const event = this;
-  console.log(event.guests, event, "event");
-  try {
-    // Remove referenced documents from other collections
-    await mongoose
-      .model("Media")
-      .deleteMany({ _id: { $in: event.backgrounds } });
-    await mongoose.model("Guest").deleteMany({ _id: { $in: event.guests } });
-    await mongoose
-      .model("CloseFriends")
-      .deleteMany({ _id: { $in: event.closeFriends } });
-    await mongoose.model("Days").deleteMany({ _id: { $in: event.days } });
-    await mongoose
-      .model("Memories")
-      .deleteMany({ _id: { $in: event.memories } });
-    await mongoose
-      .model("LoveStory")
-      .deleteMany({ _id: { $in: event.loveStory } });
-
-    next();
-  } catch (error) {
-    next(error);
-  }
-});
 
 // Function to update status based on startDateTime and endDateTime
 function updateStatusEvent() {

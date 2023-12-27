@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const forEnum = ["guest", "agency", "admin"];
+const forEnum = ["Guest", "Agency", "Admin"];
 const purposeEnum = [
   "invitation",
   "ask-travel-detail",

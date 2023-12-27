@@ -1,10 +1,5 @@
-const CloseFriendsModel = require("../../CloseFriends/model/CloseFriendsModel");
 const DaysModel = require("../../Days/model/DaysModel");
 const GuestModel = require("../../Guest/model/GuestModel");
-const LoveStoryModel = require("../../LoveStory/model/LoveStoryModel");
-const {
-  DeleteImageService,
-} = require("../../Media/services/DeleteImageService");
 const MemoriesModel = require("../../Memories/model/MemoriesModel");
 const EventModel = require("../model/EventModel");
 
@@ -18,17 +13,11 @@ const DeleteEventService = async (eventId, res) => {
       return res.status(404).json({ message: `${eventId} event not found` });
     }
 
-    if (event.memories.length) {
-      for (image of memory.images) {
-        await DeleteImageService(image.toString(), res, false);
-      }
-    }
-
     await GuestModel.deleteMany({ _id: { $in: event.guests } });
 
-    await CloseFriendsModel.deleteMany({ _id: { $in: event.closeFriends } });
+    // await CloseFriendsModel.deleteMany({ _id: { $in: event.closeFriends } });
 
-    await LoveStoryModel.deleteMany({ _id: { $in: event.loveStory } });
+    // await LoveStoryModel.deleteMany({ _id: { $in: event.loveStory } });
 
     await MemoriesModel.deleteMany({ _id: { $in: event.memories } });
 

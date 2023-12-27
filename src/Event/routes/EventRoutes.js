@@ -32,7 +32,7 @@ EventRouter.get("/", IsAdmin, FetchEventController);
 
 // TODO: get event detail Router
 
-EventRouter.get("/detail/:eventId", IsAdmin, FetchEventByIdController);
+EventRouter.get("/detail/:eventId", FetchEventByIdController);
 
 // ===========
 
