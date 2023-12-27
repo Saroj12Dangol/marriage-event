@@ -21,8 +21,11 @@ const CreateGuestService = async (req, eventId, res) => {
         });
       } else {
         const newGuest = new GuestModel(req.body);
+        event.guests.push(newGuest._id);
+
+        newGuest.event = event._id;
+
         const guest = await newGuest.save();
-        event.guests.push(guest._id);
 
         await event.save();
 

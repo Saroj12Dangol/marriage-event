@@ -1,6 +1,6 @@
 // HTML email template
-const accommodationTemplate = (subject, text, days, eventTitle) => `
-<!DOCTYPE html>
+const RoomBookedTemplate = (subject, text, room, hotel, eventTitle) => `
+      <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -35,28 +35,6 @@ const accommodationTemplate = (subject, text, days, eventTitle) => `
             text-decoration: none;
             border-radius: 5px;
         }
-        .event-card {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            padding: 10px;
-            background-color: #fff;
-        }
-        .day-title {
-            font-size: 20px;
-            color: #2c3e50;
-        }
-        .event-description {
-            color: #555555;
-        }
-        .event-location {
-            font-style: italic;
-            color: #888888;
-        }
-        .event-date-time {
-            font-weight: bold;
-            color: #3498db;
-        }
         .event-title-container {
             background-color: #2c3e50;
             color: #ffffff;
@@ -71,33 +49,19 @@ const accommodationTemplate = (subject, text, days, eventTitle) => `
     </style>
 </head>
 <body>
-
  <div class="event-title-container">
         <p class="event-title">${eventTitle}</p>
     </div>
-
     <header>
         <h1>${subject}</h1>
     </header>
     <div style="padding: 20px;">
         <p>${text}</p>
-        ${days
-          .map(
-            (day) => `
-            <div class="event-card">
-                <div class="day-title">${day.title}</div>
-                <div class="event-description">${day.description}</div>
-                <div class="event-location">${day.location}</div>
-                <div class="event-date-time">${new Date(
-                  day.dateTime
-                ).toLocaleString()}</div>
-            </div>
-        `
-          )
-          .join("")}
+        <a href="${process.env.AGENCY_URL}?eventId=${eventId}" style="text-decoration: none;">CLICK HERE</a>
     </div>
 </body>
 </html>
-`;
 
-module.exports = { accommodationTemplate };
+    `;
+
+module.exports = { RoomBookedTemplate };

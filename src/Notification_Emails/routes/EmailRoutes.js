@@ -2,8 +2,8 @@ const express = require("express");
 const {
   SendEmailController,
   SendEmailIndividualController,
-  SendAccommodatationEmailController,
-  SendAccommodatationEmailIndividualController,
+  SendDaysInfoEmailController,
+  SendDayInfoEmailIndividualController,
 } = require("../controllers/InvitationToGuestsController");
 
 const EmailRouter = express.Router();
@@ -20,15 +20,20 @@ EmailRouter.post("/send-email", SendEmailIndividualController);
 
 // TODO: post email of room and event days controller============
 EmailRouter.post(
-  "/send-email/accommodatation/bulk",
-  SendAccommodatationEmailController
+  "/send-email/days-information/bulk",
+  SendDaysInfoEmailController
 );
-
 
 // TODO: post email of room and event days controller============
 EmailRouter.post(
-  "/send-email/accommodatation",
-  SendAccommodatationEmailIndividualController
+  "/send-email/days-information",
+  SendDayInfoEmailIndividualController
+);
+
+// TODO: send email to guests============
+EmailRouter.post(
+  "/send-email/days-information",
+  SendDayInfoEmailIndividualController
 );
 
 // =========

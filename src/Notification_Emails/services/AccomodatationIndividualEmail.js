@@ -12,6 +12,8 @@ const AccommodatationIndividualEmailsService = async ({
   event,
   emails,
   days,
+  rooms,
+  hotels,
 }) => {
   try {
     const eventDetail = await EventModel.findById(event);
@@ -24,7 +26,9 @@ const AccommodatationIndividualEmailsService = async ({
       event,
       days,
       eventDetail.title,
-      res
+      res,
+      rooms,
+      hotels
     );
 
     emails.forEach(async (email) => {

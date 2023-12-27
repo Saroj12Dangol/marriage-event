@@ -1,4 +1,5 @@
 const { SendEmail } = require("../../../utils/Email");
+const EventModel = require("../../Event/model/EventModel");
 const Notification = require("../model/NotificationModel");
 
 const AccommodatationEmailService = async ({
@@ -12,8 +13,25 @@ const AccommodatationEmailService = async ({
   days,
 }) => {
   try {
+    const eventGuests = await EventModel.findById(event);
+
+    if (!eventGuests) {
+      return res.status(404).json({
+        message: `${event} event is not found.`,
+      });
+    }
+
     // TODO: fetch the emails of users to send email
-    SendEmail(emails, subject, text, purpose, event, days, res);
+    SendEmail(
+      emails,
+      subject,
+      text,
+      purpose,
+      event,
+      days,
+      eventGuests.title,
+      res
+    );
 
     emails.forEach(async (email) => {
       const notification = new Notification({

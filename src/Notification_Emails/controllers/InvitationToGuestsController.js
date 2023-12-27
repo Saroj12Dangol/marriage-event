@@ -12,14 +12,17 @@ const {
 } = require("../services/IndividualEmailsService");
 const { SendEmailService } = require("../services/SendBulkEmailService");
 
-const purposeEnum = ["invitation", "agency", "accommodatation"];
+const purposeEnum = [
+  "invitation",
+  "agency",
+  "accommodatation",
+  "days-information",
+];
 
 // TODO: email controller
 
 const SendEmailController = async (req, res) => {
   const { travelStatus, eventStatus } = req.query;
-
-  let days = [];
 
   const requiredFields = ["subject", "text", "purpose", "to", "event"];
 
@@ -33,7 +36,7 @@ const SendEmailController = async (req, res) => {
 
   const { to, subject, text, purpose, event } = req.body;
 
-  // Build the query based on the defined eventStatus and travelStatus
+  // TODO: Build the query based on the defined eventStatus and travelStatus
   const query = {};
   if (eventStatus !== undefined) {
     query.eventStatus = eventStatus;
@@ -48,10 +51,6 @@ const SendEmailController = async (req, res) => {
     });
   }
 
-  if (purpose === "accommodatation") {
-    days = await GetDaysInfoOfEventService(event, res);
-  }
-
   await SendEmailService({
     to,
     subject,
@@ -61,11 +60,11 @@ const SendEmailController = async (req, res) => {
     res,
     event,
     query,
-    days: days.days,
   });
 };
 
-const SendAccommodatationEmailController = async (req, res) => {
+// TODO:
+const SendDaysInfoEmailController = async (req, res) => {
   let daysAndGuests = [];
 
   const requiredFields = ["subject", "text", "purpose", "to", "event"];
@@ -79,6 +78,8 @@ const SendAccommodatationEmailController = async (req, res) => {
   }
 
   const { to, subject, text, purpose, event } = req.body;
+
+  // TODO: Build the query based on the defined eventStatus and travelStatus
 
   if (!purposeEnum.includes(purpose)) {
     return res.status(400).json({
@@ -94,17 +95,18 @@ const SendAccommodatationEmailController = async (req, res) => {
   const emails = guests.map((g) => g.email);
 
   await AccommodatationEmailService({
-    to,
     subject,
     text,
     purpose,
     res,
+    to,
     event,
     emails,
     days,
   });
 };
 
+// TODO: send email individually
 const SendEmailIndividualController = async (req, res) => {
   const requiredFields = [
     "subject",
@@ -144,7 +146,7 @@ const SendEmailIndividualController = async (req, res) => {
 };
 
 // TODO:
-const SendAccommodatationEmailIndividualController = async (req, res) => {
+const SendDayInfoEmailIndividualController = async (req, res) => {
   const requiredFields = [
     "subject",
     "text",
@@ -190,6 +192,6 @@ const SendAccommodatationEmailIndividualController = async (req, res) => {
 module.exports = {
   SendEmailController,
   SendEmailIndividualController,
-  SendAccommodatationEmailController,
-  SendAccommodatationEmailIndividualController,
+  SendDaysInfoEmailController,
+  SendDayInfoEmailIndividualController,
 };

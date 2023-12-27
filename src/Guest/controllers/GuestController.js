@@ -1,4 +1,7 @@
 const {
+  AcceptInvitationService,
+} = require("../services/AcceptInvitationService");
+const {
   CreateGuestInBulkService,
 } = require("../services/CreateGuestInBulkService");
 const { CreateGuestService } = require("../services/CreateGuestService");
@@ -19,7 +22,7 @@ const CreateGuestController = async (req, res) => {
   const { eventId } = req.params;
   // TODO: data validation ===========
   // Check if all required fields are present
-  const requiredFields = ["name", "email", "phone", "address"];
+  const requiredFields = ["email"];
 
   const missingFields = requiredFields.filter((field) => !req.body[field]);
 
@@ -88,10 +91,10 @@ const ToggleGuestEventStatusController = async (req, res) => {
   }
 };
 
-// TODO: toggle status
+// TODO: allocate room
 
 const AllocationRoomController = async (req, res) => {
-  const { guestId } = req.params;
+  const { guestId, eventId } = req.params;
 
   // TODO: data validation ===========
   // Check if all required fields are present
@@ -110,6 +113,7 @@ const AllocationRoomController = async (req, res) => {
 
   RoomAssignService(
     guestId,
+    req.event.title,
     { roomNo, hotel, travelStatus: "roomAssigned" },
     res
   );
@@ -131,6 +135,26 @@ const ToggleGuestTravelStatusController = async (req, res) => {
   }
 };
 
+// TODO: edit guest
+
+const AcceptInvitationGuestController = async (req, res) => {
+  const { eventId } = req.query;
+
+  // TODO: data validation ===========
+  // Check if all required fields are present
+  const requiredFields = ["name", "email", "phone", "address"];
+
+  const missingFields = requiredFields.filter((field) => !req.body[field]);
+
+  if (missingFields.length > 0) {
+    return res.status(400).json({
+      error: `Missing required fields: ${missingFields.join(", ")}`,
+    });
+  }
+
+  AcceptInvitationService(eventId, req, res);
+};
+
 module.exports = {
   CreateGuestController,
   FetchGuestController,
@@ -140,4 +164,5 @@ module.exports = {
   DeleteGuestController,
   CreateGuestInBulkController,
   AllocationRoomController,
+  AcceptInvitationGuestController,
 };

@@ -8,18 +8,23 @@ const {
 const {
   accommodationTemplate,
 } = require("../constants/emailTemplates/accomodationTemplate");
+const {
+  RoomBookedTemplate,
+} = require("../constants/emailTemplates/RoomBookedTemplate");
 
 const SendEmail = async (
-  to,
+  emails,
   subject,
   text,
   purpose,
   eventId,
   days,
   eventTitle,
-  res
+  res,
+  hotel,
+  room
 ) => {
-  console.log(purpose, "pur");
+  console.log({ emails, subject, text, purpose, eventId, days, eventTitle });
   var mail_transport_mail_transport = mailer.createTransport({
     host: process.env.EMAIL_HOST,
     auth: {
@@ -31,7 +36,7 @@ const SendEmail = async (
   try {
     const email = await mail_transport_mail_transport.sendMail({
       from: process.env.EMAIL_SENDER,
-      to,
+      to: emails,
       subject,
       text,
       html:
@@ -39,14 +44,12 @@ const SendEmail = async (
           ? invitationTemplate(subject, text, eventId, eventTitle)
           : purpose === "agency"
           ? agencyTemplate(subject, text, eventId, eventTitle)
-          : accommodationTemplate(subject, text, eventId, days, eventTitle),
+          : purpose === "accommodatation"
+          ? RoomBookedTemplate(subject, text, room, hotel, eventTitle)
+          : accommodationTemplate(subject, text, days, eventTitle),
     });
-
-    console.log(email.accepted);
   } catch (error) {
-    return res.status(400).json({
-      message: error.message,
-    });
+    throw new Error(error.message);
   }
 };
 

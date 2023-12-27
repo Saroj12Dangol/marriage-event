@@ -1,6 +1,8 @@
 const { CreateMemoriesService } = require("../services/CreateMemoriesService");
+const { DeleteMemoryService } = require("../services/DeleteMemoryService");
 const { EditMemoryService } = require("../services/EditMemoryService");
 
+// TODO: create memory
 const CreateMemoriesController = (req, res) => {
   const { eventId } = req.params;
 
@@ -38,10 +40,22 @@ const EditMemoriesController = async (req, res) => {
   EditMemoryService(memoryId, req.files, req.body, populateObj, res);
 };
 
-const FetchMemoriesController = () => {};
+const FetchMemoriesController = (req, res) => {
+  return res.json({
+    message: "Not done",
+  });
+};
+
+// TODO: delete the memories
+const DeleteMemoryController = async (req, res) => {
+  const { memoryId } = req.params;
+
+  DeleteMemoryService(memoryId, res);
+};
 
 module.exports = {
   CreateMemoriesController,
   FetchMemoriesController,
   EditMemoriesController,
+  DeleteMemoryController,
 };

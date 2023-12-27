@@ -7,8 +7,10 @@ const {
   DeleteGuestController,
   CreateGuestInBulkController,
   AllocationRoomController,
+  AcceptInvitationGuestController,
 } = require("../controllers/GuestController");
 const IsAdmin = require("../../../middlewares/AdminProtect");
+const { IsGuestOfEvent } = require("../../../middlewares/IsGuestOfEvent");
 
 const GuestRouter = express.Router();
 
@@ -59,7 +61,27 @@ GuestRouter.patch(
   ToggleGuestEventStatusController
 );
 
+// TODO: allocate hotel room to guest
 GuestRouter.patch("/add-room/:guestId", AllocationRoomController);
+
+// ===========
+
+// TODO: accept the invitation
+GuestRouter.put(
+  "/accept-invitation/:eventId",
+  IsGuestOfEvent,
+  AcceptInvitationGuestController
+);
+
+// ===========
+
+// TODO: reject the invitation
+
+GuestRouter.patch(
+  "/add-room/:guestId/:eventId",
+  IsGuestOfEvent,
+  AllocationRoomController
+);
 
 // ===========
 

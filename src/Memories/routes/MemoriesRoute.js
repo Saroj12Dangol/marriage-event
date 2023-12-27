@@ -5,6 +5,7 @@ const {
   CreateMemoriesController,
   FetchMemoriesController,
   EditMemoriesController,
+  DeleteMemoryController,
 } = require("../controllers/MemoriesController");
 
 const MemoriesRouter = express.Router();
@@ -31,6 +32,12 @@ MemoriesRouter.put(
   upload.fields([{ name: "images" }]),
   EditMemoriesController
 );
+
+// ===========
+
+// TODO: delete memories Router
+
+MemoriesRouter.delete("/:memoryId", DeleteMemoryController);
 
 // ===========
 

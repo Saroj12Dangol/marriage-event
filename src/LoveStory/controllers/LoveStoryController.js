@@ -47,6 +47,8 @@ const EditLoveStoryController = async (req, res) => {
   EditLoveStoryService(loveStoryId, req.file, req.body, populateObj, res);
 };
 
+
+// TODO: delete the love story
 const DeleteLoveStoryController = async (req, res) => {
   const { loveStoryId } = req.params;
 

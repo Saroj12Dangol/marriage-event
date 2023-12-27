@@ -1,11 +1,13 @@
 const mongoose = require("mongoose");
 
-const eventStatusEnum = ["accept", "reject", "pending"];
+const eventStatusEnum = ["accept", "pending"];
 const travelStatusEnum = [
-  "asked",
+  "travel-detail-asked",
+  "travel-detail-received",
+  "asked-to-agent",
   "received",
   "roomAssigned",
-  "accommodation",
+  "days-information",
   "pending",
 ];
 
@@ -51,6 +53,11 @@ const GuestSchema = mongoose.Schema(
       enum: travelStatusEnum,
       default: "pending",
     },
+
+    // event: {
+    //   type: mongoose.Schema.ObjectId,
+    //   ref: "Event",
+    // },
   },
 
   {

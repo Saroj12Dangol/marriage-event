@@ -10,21 +10,14 @@ const SendEmailService = async ({
   to,
   event,
   query,
-  days,
 }) => {
   try {
     // TODO: fetch the emails of users to send email
-
-    // const eventGuests = await EventModel.findById(event).populate("guests");
 
     const eventGuests = await EventModel.findById(event).populate({
       path: "guests",
       match: query, // Filtering condition
     });
-
-    // return res.json({
-    //   data: eventGuests,
-    // });
 
     let emails = [];
 
@@ -43,7 +36,7 @@ const SendEmailService = async ({
       text,
       purpose,
       event,
-      days,
+      [],
       eventGuests.title,
       res
     );

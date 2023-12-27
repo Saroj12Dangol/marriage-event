@@ -1,5 +1,5 @@
 // HTML email template
-const agencyTemplate = (subject, text, eventId) => `
+const agencyTemplate = (subject, text, eventId, eventTitle) => `
       <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,9 +35,23 @@ const agencyTemplate = (subject, text, eventId) => `
             text-decoration: none;
             border-radius: 5px;
         }
+        .event-title-container {
+            background-color: #2c3e50;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px;
+        }
+        .event-title {
+            font-size: 24px;
+            margin: 0;
+            color:#fff
+        }
     </style>
 </head>
 <body>
+ <div class="event-title-container">
+        <p class="event-title">${eventTitle}</p>
+    </div>
     <header>
         <h1>${subject}</h1>
     </header>
