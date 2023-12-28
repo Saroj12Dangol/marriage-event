@@ -1,8 +1,8 @@
 const GuestModel = require("../model/GuestModel");
 
-const FetchGuestService = async (res) => {
+const FetchGuestService = async (res, populateObj) => {
   try {
-    const guests = await GuestModel.find();
+    const guests = await GuestModel.find().populate(populateObj);
 
     return res.status(200).json({
       data: guests,

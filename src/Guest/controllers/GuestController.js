@@ -1,4 +1,5 @@
 const { travelStatusObj } = require("../../../constants/statuses");
+const { populateFunctionality } = require("../../../utils/Populate");
 const {
   AcceptInvitationService,
 } = require("../services/AcceptInvitationService");
@@ -50,7 +51,12 @@ const CreateGuestInBulkController = async (req, res) => {
 // TODO: fetch guest
 
 const FetchGuestController = async (req, res) => {
-  FetchGuestService(res);
+  let populateObj = [];
+  if (req.query.populate) {
+    populateObj = await populateFunctionality(req.query.populate);
+  }
+
+  FetchGuestService(res, populateObj);
 };
 
 // TODO: edit guest

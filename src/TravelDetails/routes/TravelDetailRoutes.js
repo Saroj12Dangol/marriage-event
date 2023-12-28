@@ -9,7 +9,7 @@ const TravelRouter = express.Router();
 // TODO: post days router============
 TravelRouter.post(
   "/:eventId",
-  upload.single("image"),
+  upload.single("ticketImage"),
   CreateTravelDetailsController
 );
 

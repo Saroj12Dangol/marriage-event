@@ -35,15 +35,16 @@ const CreateTravelDetailService = async (req, eventId, file, res) => {
 
     const travelDetail = new TravelDetailModel(req.body);
 
-    guest.travelDetail = travelDetail._id;
+    travelDetail.ticketImage = imageResponse._id;
 
-    await travelDetail.save();
+    const savedTravelDetail = await travelDetail.save();
+
+    guest.travelDetail = savedTravelDetail._id;
 
     await guest.save();
 
-    return res.json({
-      event,
-      guestId,
+    return res.status(200).json({
+      data: savedTravelDetail,
     });
   } catch (error) {
     throw new Error(error.message);
