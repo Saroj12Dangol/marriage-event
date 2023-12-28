@@ -18,9 +18,15 @@ const AlertAskTravelDetail = {
   text: "Text for ask for event details",
 };
 
+const TravelAgency = {
+  subject: "Subject for ask for event details",
+  text: "Text for ask for event details",
+};
+
 module.exports = {
   InvitationEmail,
   AskTravelDetail,
   AlertInvitationEmail,
   AlertAskTravelDetail,
+  TravelAgency,
 };

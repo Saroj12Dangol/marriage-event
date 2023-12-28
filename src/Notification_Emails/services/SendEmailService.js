@@ -3,6 +3,7 @@ const {
   AskTravelDetail,
   AlertInvitationEmail,
   AlertAskTravelDetail,
+  TravelAgency,
 } = require("../../../constants/EmailContants");
 const {
   purposeObj,
@@ -191,18 +192,17 @@ const SendEmailService = async (purpose, eventId, res) => {
           message: `Travel agency is not assigned to this event ${eventId}`,
         });
       }
+      const emails = event.agency.email;
 
-      console.log(emails, "emails");
-
-      // SendEmail({
-      //   emails,
-      //   subject: AskTravelDetail.subject,
-      //   text: AskTravelDetail.text,
-      //   purpose,
-      //   eventId,
-      //   eventTitle: event.title,
-      //   days,
-      // });
+      SendEmail({
+        emails,
+        subject: TravelAgency.subject,
+        text: TravelAgency.text,
+        purpose,
+        eventId,
+        eventTitle: event.title,
+        days,
+      });
     } else {
       return res.status(400).json({
         message: "Bad request",
