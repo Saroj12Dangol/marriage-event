@@ -34,7 +34,11 @@ const {
   CloseFriendsRouter,
 } = require("./src/CloseFriends/routes/CloseFriendsRoutes");
 const { LoveStoryRouter } = require("./src/LoveStory/routes/LoveStoryRoutes");
-const { TravelRouter } = require("./src/TravelDetails/routes/TravelDetailRoutes");
+const {
+  TravelRouter,
+} = require("./src/TravelDetails/routes/TravelDetailRoutes");
+const { FaqRouter } = require("./src/Faqs/routes/FaqRoutes");
+const { ContactRouter } = require("./src/EmergencyContact/routes/ContactRoutes");
 
 // ==============
 
@@ -82,6 +86,8 @@ app.use("/v1/days", DaysRouter);
 app.use("/v1/love-story", LoveStoryRouter);
 app.use("/v1/friends", CloseFriendsRouter);
 app.use("/v1/travel", TravelRouter);
+app.use("/v1/faq", FaqRouter);
+app.use("/v1/contact", ContactRouter);
 
 app.get("/v1", (req, res) => {
   res.send("Welcome to marriage event management");

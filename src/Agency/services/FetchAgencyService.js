@@ -2,8 +2,6 @@ const AgencyModel = require("../model/AgencyModel");
 
 const fetchAgencyService = async (req, res) => {
   try {
-    // TODO: post agency in database
-
     const agency = await AgencyModel.find();
 
     return res.status(200).json({

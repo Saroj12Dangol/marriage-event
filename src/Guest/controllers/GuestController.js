@@ -101,11 +101,11 @@ const ToggleGuestEventStatusController = async (req, res) => {
 // TODO: allocate room
 
 const AllocationRoomController = async (req, res) => {
-  const { guestId, eventId } = req.params;
+  const { guestId } = req.params;
 
   // TODO: data validation ===========
   // Check if all required fields are present
-  const requiredFields = ["roomNo", "hotel"];
+  const requiredFields = ["roomNo", "hotel", "checkInDate", "checkOutDate"];
 
   const missingFields = requiredFields.filter((field) => !req.body[field]);
 
@@ -116,12 +116,18 @@ const AllocationRoomController = async (req, res) => {
     });
   }
 
-  const { roomNo, hotel } = req.body;
+  const { roomNo, hotel, checkInDate, checkOutDate } = req.body;
 
   RoomAssignService(
     guestId,
     req.event.title,
-    { roomNo, hotel, travelStatus: travelStatusObj.roomAssigned },
+    {
+      roomNo,
+      hotel,
+      travelStatus: travelStatusObj.roomAssigned,
+      checkInDate,
+      checkOutDate,
+    },
     res
   );
 };
@@ -145,8 +151,6 @@ const ToggleGuestTravelStatusController = async (req, res) => {
 // TODO: edit guest
 
 const AcceptInvitationGuestController = async (req, res) => {
-  const { eventId } = req.query;
-
   // TODO: data validation ===========
   // Check if all required fields are present
   const requiredFields = ["name", "email", "phone", "address"];
@@ -159,7 +163,7 @@ const AcceptInvitationGuestController = async (req, res) => {
     });
   }
 
-  AcceptInvitationService(eventId, req, res);
+  AcceptInvitationService(req, res);
 };
 
 module.exports = {

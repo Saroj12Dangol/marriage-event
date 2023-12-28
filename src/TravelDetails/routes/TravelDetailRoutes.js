@@ -3,6 +3,7 @@ const { upload } = require("../../../utils/ImageUpload");
 const {
   CreateTravelDetailsController,
 } = require("../controllers/TravelDetailController");
+const { IsGuestOfEvent } = require("../../../middlewares/IsGuestOfEvent");
 
 const TravelRouter = express.Router();
 
@@ -10,6 +11,7 @@ const TravelRouter = express.Router();
 TravelRouter.post(
   "/:eventId",
   upload.single("ticketImage"),
+  IsGuestOfEvent,
   CreateTravelDetailsController
 );
 

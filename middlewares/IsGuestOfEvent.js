@@ -1,14 +1,20 @@
-const moment = require("moment");
 const EventModel = require("../src/Event/model/EventModel");
 
 const IsGuestOfEvent = async (req, res, next) => {
-  const { eventId, guestId = undefined } = req.params;
+  const { eventId, guestId = undefined } = req.params; //guestId for room allocation
+  const { email } = req.body;
+
+  if (!guestId && !email) {
+    res.status(400).json({
+      message: "Email is required",
+    });
+  }
 
   try {
     const event = await EventModel.findById(eventId).populate({
       path: "guests",
       $or: [
-        { email: req.body.email }, // Match by email
+        { email: email }, // Match by email
         { _id: guestId }, // Match by _id (assuming req.body.email contains either email or _id)
       ],
     });

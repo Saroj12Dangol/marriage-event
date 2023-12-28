@@ -1,10 +1,11 @@
+const { eventStatusObj } = require("../../../constants/statuses");
 const GuestModel = require("../model/GuestModel");
 
-const AcceptInvitationService = async (eventId, req, res) => {
+const AcceptInvitationService = async (req, res) => {
   try {
     const guest = await GuestModel.findOneAndUpdate(
       { _id: req.guest._id },
-      { $set: { ...req.body, eventStatus: "accept" } },
+      { $set: { ...req.body, eventStatus: eventStatusObj.accept } },
       { new: true } // This option ensures that the updated document is returned
     );
 

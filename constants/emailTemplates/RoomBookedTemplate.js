@@ -1,6 +1,14 @@
-// HTML email template
-const RoomBookedTemplate = (subject, text, room, hotel, eventTitle) => `
-      <!DOCTYPE html>
+// HTML email template for room booking confirmation
+const RoomBookedTemplate = (
+  subject,
+  guestName,
+  room,
+  hotel,
+  checkInDate,
+  checkOutDate,
+  eventTitle
+) => `
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,54 +22,46 @@ const RoomBookedTemplate = (subject, text, room, hotel, eventTitle) => `
             background-color: #f4f4f4;
         }
         header {
-            background-color: #2c3e50;
+            background-color: #3498db;
             color: #ffffff;
             text-align: center;
             padding: 10px;
         }
         h1 {
-            color: #2c3e50;
+            color: #3498db;
         }
         p {
             color: #555555;
             font-size: 16px;
         }
-        a {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
+        .booking-details-container {
             background-color: #3498db;
-            color: #ffffff;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .event-title-container {
-            background-color: #2c3e50;
             color: #ffffff;
             text-align: center;
             padding: 10px;
         }
-        .event-title {
-            font-size: 24px;
+        .booking-details {
+            font-size: 18px;
             margin: 0;
-            color:#fff
         }
     </style>
 </head>
 <body>
- <div class="event-title-container">
-        <p class="event-title">${eventTitle}</p>
+    <div class="booking-details-container">
+        <p class="booking-details">Booking Confirmation for ${eventTitle}</p>
     </div>
     <header>
         <h1>${subject}</h1>
     </header>
     <div style="padding: 20px;">
-        <p>${text}</p>
-        <a href="${process.env.AGENCY_URL}?eventId=${eventId}" style="text-decoration: none;">CLICK HERE</a>
+        <p>Hello ${guestName},</p>
+        <p>Your room (${room}) at ${hotel} has been booked successfully.</p>
+        <p>Check-in Date: ${checkInDate}</p>
+        <p>Check-out Date: ${checkOutDate}</p>
+        <p>For any inquiries, please contact our customer service.</p>
     </div>
 </body>
 </html>
-
-    `;
+`;
 
 module.exports = { RoomBookedTemplate };

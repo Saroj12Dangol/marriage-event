@@ -35,6 +35,14 @@ const GuestSchema = mongoose.Schema(
       type: String,
     },
 
+    checkInDate: {
+      type: Date,
+    },
+
+    checkOutDate: {
+      type: Date,
+    },
+
     eventStatus: {
       type: String,
       enum: eventStatusEnum,

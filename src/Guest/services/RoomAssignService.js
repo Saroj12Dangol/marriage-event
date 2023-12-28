@@ -1,4 +1,5 @@
-const { purposeObj } = require("../../../constants/statuses");
+const { RoomAssigned } = require("../../../constants/EmailContants");
+const { purposeObj, travelStatusObj } = require("../../../constants/statuses");
 const { SendEmail } = require("../../../utils/Email");
 const GuestModel = require("../model/GuestModel");
 
@@ -16,21 +17,24 @@ const RoomAssignService = async (guestId, eventTitle, body, res) => {
       });
     }
 
-    SendEmail(
-      guest.email,
-      "",
-      "",
-      purposeObj.accommodation,
-      "",
-      [],
+    guest.travelStatus = travelStatusObj.roomAssigned;
+
+    const updatedGuest = await guest.save();
+
+    SendEmail({
+      emails: guest.email,
+      subject: RoomAssigned.subject,
+      text: RoomAssigned.text,
+      purpose: purposeObj.accommodation,
       eventTitle,
-      {},
-      guest.hotel,
-      guest.roomNo
-    );
+      hotel: guest.hotel,
+      room: guest.room,
+      checkInDate: guest.checkInDate,
+      checkoutDate: guest.checkOutDate,
+    });
 
     return res.status(200).json({
-      data: guest,
+      data: updatedGuest,
     });
   } catch (error) {
     return res.status(500).json({

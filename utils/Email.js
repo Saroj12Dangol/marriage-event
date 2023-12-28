@@ -26,6 +26,8 @@ const SendEmail = async ({
   eventTitle,
   hotel,
   room,
+  checkInDate,
+  checkoutDate,
 }) => {
   var mail_transport_mail_transport = mailer.createTransport({
     host: process.env.EMAIL_HOST,
@@ -48,7 +50,15 @@ const SendEmail = async ({
           : purpose === purposeObj.travelAgency
           ? agencyTemplate(subject, text, eventId, eventTitle)
           : purpose === purposeObj.accommodation
-          ? RoomBookedTemplate(subject, text, room, hotel, eventTitle)
+          ? RoomBookedTemplate(
+              subject,
+              text,
+              room,
+              hotel,
+              checkInDate,
+              checkoutDate,
+              eventTitle
+            )
           : purpose === purposeObj.askTravelDetail ||
             purposeObj.alertAskTravelDetail
           ? TravelDetailTemplate(subject, text, eventId, eventTitle)
