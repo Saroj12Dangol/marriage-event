@@ -14,7 +14,7 @@ const purposeObj = {
   askTravelDetail: "ask-travel-detail",
   alertAskTravelDetail: "alert-ask-travel-detail",
   travelAgency: "travel-agency",
-  accommodation: "accommodatation", // Note: Corrected the spelling from "accommodatation" to "accommodation"
+  accommodation: "accommodation", // Note: Corrected the spelling from "accommodation" to "accommodation"
   daysInformation: "days-information",
 };
 

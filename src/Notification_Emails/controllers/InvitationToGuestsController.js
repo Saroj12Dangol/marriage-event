@@ -1,10 +1,8 @@
 const { purposeEnum } = require("../../../constants/enums");
+const { accommodationEmailService } = require("../services/AccommodationEmailService");
 const {
-  AccommodatationEmailService,
-} = require("../services/AccommodatationEmailService");
-const {
-  AccommodatationIndividualEmailsService,
-} = require("../services/AccomodatationIndividualEmail");
+  accommodationIndividualEmailsService,
+} = require("../services/AccomodationIndividualEmail");
 const {
   GetDaysInfoOfEventService,
 } = require("../services/GetDaysInfoOfEventService");
@@ -15,47 +13,6 @@ const { SendEmailService } = require("../services/SendEmailService");
 
 // TODO: email controller
 
-// const SendEmailController = async (req, res) => {
-//   const { travelStatus, eventStatus } = req.query;
-
-//   const requiredFields = ["subject", "text", "purpose", "to", "event"];
-
-//   const missingFields = requiredFields.filter((field) => !req.body[field]);
-
-//   if (missingFields.length > 0) {
-//     return res.status(400).json({
-//       error: `Missing required fields: ${missingFields.join(", ")}`,
-//     });
-//   }
-
-//   const { to, subject, text, purpose, event } = req.body;
-
-//   // TODO: Build the query based on the defined eventStatus and travelStatus
-//   const query = {};
-//   if (eventStatus !== undefined) {
-//     query.eventStatus = eventStatus;
-//   }
-//   if (travelStatus !== undefined) {
-//     query.travelStatus = travelStatus;
-//   }
-
-//   if (!purposeEnum.includes(purpose)) {
-//     return res.status(400).json({
-//       message: `${purpose} is not valid: should be ${purposeEnum}`,
-//     });
-//   }
-
-//   await SendEmailService({
-//     to,
-//     subject,
-//     text,
-//     purpose,
-//     query,
-//     res,
-//     event,
-//     query,
-//   });
-// };
 
 // TODO:
 const SendDaysInfoEmailController = async (req, res) => {
@@ -88,7 +45,7 @@ const SendDaysInfoEmailController = async (req, res) => {
 
   const emails = guests.map((g) => g.email);
 
-  await AccommodatationEmailService({
+  await accommodationEmailService({
     subject,
     text,
     purpose,
@@ -171,7 +128,7 @@ const SendDayInfoEmailIndividualController = async (req, res) => {
 
   const days = daysAndGuests.days;
 
-  await AccommodatationIndividualEmailsService({
+  await accommodationIndividualEmailsService({
     to,
     subject,
     text,

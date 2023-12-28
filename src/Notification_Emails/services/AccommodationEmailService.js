@@ -2,7 +2,7 @@ const { SendEmail } = require("../../../utils/Email");
 const EventModel = require("../../Event/model/EventModel");
 const Notification = require("../model/NotificationModel");
 
-const AccommodatationEmailService = async ({
+const accommodationEmailService = async ({
   subject,
   text,
   purpose,
@@ -54,4 +54,4 @@ const AccommodatationEmailService = async ({
   }
 };
 
-module.exports = { AccommodatationEmailService };
+module.exports = { accommodationEmailService };

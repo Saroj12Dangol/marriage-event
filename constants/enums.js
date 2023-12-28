@@ -30,7 +30,7 @@ const purposeEnum = [
   "ask-travel-detail",
   "alert-ask-travel-detail",
   "travel-agency",
-  "accommodatation",
+  "accommodation",
   "days-information",
 ];
 
@@ -40,5 +40,5 @@ module.exports = {
   statusEnum,
   purposeEnum,
   forEnum,
-  travelDetailEnum
+  travelDetailEnum,
 };
