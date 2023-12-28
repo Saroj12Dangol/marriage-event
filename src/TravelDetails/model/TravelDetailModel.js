@@ -7,6 +7,14 @@ const TravelDetailSchema = mongoose.Schema(
       ref: "Media",
     },
 
+    airline: {
+      type: String,
+    },
+
+    flightNumber: {
+      type: String,
+    },
+
     arrivalDateTime: {
       type: Date,
     },
@@ -16,6 +24,10 @@ const TravelDetailSchema = mongoose.Schema(
     },
 
     arrivalPlace: {
+      type: String,
+    },
+
+    email: {
       type: String,
     },
 

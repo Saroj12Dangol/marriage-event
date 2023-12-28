@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
-const { eventStatusEnum, travelStatusEnum } = require("../../../constants/enums");
-
-
+const {
+  eventStatusEnum,
+  travelStatusEnum,
+} = require("../../../constants/enums");
 
 const GuestSchema = mongoose.Schema(
   {
@@ -44,6 +45,11 @@ const GuestSchema = mongoose.Schema(
       type: String,
       enum: travelStatusEnum,
       default: "pending",
+    },
+
+    travelDetail: {
+      type: mongoose.Schema.ObjectId,
+      ref: "TravelDetail",
     },
 
     // event: {

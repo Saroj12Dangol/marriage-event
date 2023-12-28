@@ -38,7 +38,7 @@ EventRouter.get("/detail/:eventId", FetchEventByIdController);
 
 // TODO: add agency to event
 
-EventRouter.patch("/add/agency/:eventId", IsAdmin, addAgencyToEventController);
+EventRouter.patch("/add-agency/:eventId", IsAdmin, addAgencyToEventController);
 
 // ===========
 

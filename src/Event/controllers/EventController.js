@@ -57,7 +57,6 @@ const FetchEventController = async (req, res) => {
 const FetchEventByIdController = async (req, res) => {
   const { eventId } = req.params;
 
-  console.log(eventId, "vet");
 
   let populateObj = [];
   if (req.query.populate) {

@@ -14,8 +14,12 @@ const AddAgencyToEventService = async (agencyId, eventId, res) => {
       });
     }
 
+    updatedEvent.agency = agencyId;
+
+    const event = await updatedEvent.save();
+
     return res.status(200).json({
-      data: updatedEvent,
+      data: event,
     });
   } catch (error) {
     return res.status(404).json({
