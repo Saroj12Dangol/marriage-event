@@ -11,6 +11,10 @@ const {
 const {
   RoomBookedTemplate,
 } = require("../constants/emailTemplates/RoomBookedTemplate");
+const { purposeObj } = require("../constants/statuses");
+const {
+  TravelDetailTemplate,
+} = require("../constants/emailTemplates/TravelDetailTemplate");
 
 const SendEmail = async ({
   emails,
@@ -38,12 +42,16 @@ const SendEmail = async ({
       subject,
       text,
       html:
-        purpose === "invitation"
+        purpose === purposeObj.invitation ||
+        purpose === purposeObj.alertInvitation
           ? invitationTemplate(subject, text, eventId, eventTitle)
-          : purpose === "agency"
+          : purpose === purposeObj.travelAgency
           ? agencyTemplate(subject, text, eventId, eventTitle)
-          : purpose === "accommodatation"
+          : purpose === purposeObj.accommodation
           ? RoomBookedTemplate(subject, text, room, hotel, eventTitle)
+          : purpose === purposeObj.askTravelDetail ||
+            purposeObj.alertAskTravelDetail
+          ? TravelDetailTemplate(subject, text, eventId, eventTitle)
           : dayInfoTemplate(subject, text, days, eventTitle),
     });
   } catch (error) {
