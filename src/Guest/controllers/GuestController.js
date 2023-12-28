@@ -1,3 +1,4 @@
+const { travelStatusObj } = require("../../../constants/statuses");
 const {
   AcceptInvitationService,
 } = require("../services/AcceptInvitationService");
@@ -114,7 +115,7 @@ const AllocationRoomController = async (req, res) => {
   RoomAssignService(
     guestId,
     req.event.title,
-    { roomNo, hotel, travelStatus: "roomAssigned" },
+    { roomNo, hotel, travelStatus: travelStatusObj.roomAssigned },
     res
   );
 };

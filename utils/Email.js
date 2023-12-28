@@ -6,8 +6,8 @@ const {
   agencyTemplate,
 } = require("../constants/emailTemplates/agencyTemplate");
 const {
-  accommodationTemplate,
-} = require("../constants/emailTemplates/accomodationTemplate");
+  dayInfoTemplate,
+} = require("../constants/emailTemplates/dayInfoTemplate");
 const {
   RoomBookedTemplate,
 } = require("../constants/emailTemplates/RoomBookedTemplate");
@@ -32,7 +32,7 @@ const SendEmail = async ({
   });
 
   try {
-    const email = await mail_transport_mail_transport.sendMail({
+    await mail_transport_mail_transport.sendMail({
       from: process.env.EMAIL_SENDER,
       to: emails,
       subject,
@@ -44,7 +44,7 @@ const SendEmail = async ({
           ? agencyTemplate(subject, text, eventId, eventTitle)
           : purpose === "accommodatation"
           ? RoomBookedTemplate(subject, text, room, hotel, eventTitle)
-          : accommodationTemplate(subject, text, days, eventTitle),
+          : dayInfoTemplate(subject, text, days, eventTitle),
     });
   } catch (error) {
     throw new Error(error.message);

@@ -12,6 +12,16 @@ const travelStatusEnum = [
   "pending",
 ];
 
+const travelDetailEnum = [
+  "travel-detail-asked",
+  "travel-detail-received",
+  "asked-to-agent",
+  "received",
+  "roomAssigned",
+  "days-information",
+  "pending",
+];
+
 const statusEnum = ["completed", "ongoing", "upcoming", "cancelled"];
 
 const purposeEnum = [
@@ -30,4 +40,5 @@ module.exports = {
   statusEnum,
   purposeEnum,
   forEnum,
+  travelDetailEnum
 };

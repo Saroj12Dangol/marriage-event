@@ -175,6 +175,39 @@ const SendEmailService = async (purpose, eventId, res) => {
         data: emails,
       });
     }
+
+    // TODO: if purpose is travel agency
+    else if (purpose === purposeObj.travelAgency) {
+      const event = await EventModel.findById(eventId).populate("agency");
+
+      if (!event) {
+        return res.status(404).json({
+          message: `${eventId} event is not found`,
+        });
+      }
+
+      if (!event.agency) {
+        return res.status(404).json({
+          message: `Travel agency is not assigned to this event ${eventId}`,
+        });
+      }
+
+      console.log(emails, "emails");
+
+      // SendEmail({
+      //   emails,
+      //   subject: AskTravelDetail.subject,
+      //   text: AskTravelDetail.text,
+      //   purpose,
+      //   eventId,
+      //   eventTitle: event.title,
+      //   days,
+      // });
+    } else {
+      return res.status(400).json({
+        message: "Bad request",
+      });
+    }
   } catch (error) {
     res.status(400).json({
       message: error.message,

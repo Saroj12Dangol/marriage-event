@@ -1,5 +1,5 @@
 // HTML email template
-const accommodationTemplate = (subject, text, days, eventTitle) => `
+const dayInfoTemplate = (subject, text, days, eventTitle) => `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -100,4 +100,4 @@ const accommodationTemplate = (subject, text, days, eventTitle) => `
 </html>
 `;
 
-module.exports = { accommodationTemplate };
+module.exports = { dayInfoTemplate };
