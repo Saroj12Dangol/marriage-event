@@ -5,6 +5,7 @@ const {
   EditFaqsController,
   DeleteFaqsController,
   FetchFaqsController,
+  SingleFaqsController,
 } = require("../controller/FaqController");
 
 const FaqRouter = express.Router();
@@ -24,6 +25,11 @@ FaqRouter.put("/:faqId", IsAdmin, EditFaqsController);
 
 // TODO: delete faqs router============
 FaqRouter.delete("/:faqId", IsAdmin, DeleteFaqsController);
+
+// ===========
+
+// TODO: get single faqs router============
+FaqRouter.get("/detail/:faqId", IsAdmin, SingleFaqsController);
 
 // ===========
 

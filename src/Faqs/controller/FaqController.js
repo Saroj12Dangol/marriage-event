@@ -2,6 +2,7 @@ const { CreateFaqsService } = require("../services/CreateFaqService");
 const { DeleteFaqsService } = require("../services/DeleteFaqService");
 const { EditFaqsService } = require("../services/EditFaqService");
 const { fetchFaqService } = require("../services/FetchFaqService");
+const { SingleFaqsService } = require("../services/SingleFaqService");
 
 // TODO: create faq
 const CreateFaqsController = (req, res) => {
@@ -40,9 +41,18 @@ const DeleteFaqsController = async (req, res) => {
   DeleteFaqsService(faqId, res);
 };
 
+
+// TODO: get single faqs
+const SingleFaqsController = async (req, res) => {
+  const { faqId } = req.params;
+
+  SingleFaqsService(faqId, res);
+};
+
 module.exports = {
   CreateFaqsController,
   EditFaqsController,
   DeleteFaqsController,
   FetchFaqsController,
+  SingleFaqsController,
 };

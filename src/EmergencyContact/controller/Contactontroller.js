@@ -2,6 +2,7 @@ const { CreateContactService } = require("../services/CreateContactervice");
 const { DeleteContactService } = require("../services/DeleteContactService");
 const { EditContactService } = require("../services/EditContactService");
 const { FetchContactService } = require("../services/FetchContactService");
+const { SingleContactService } = require("../services/SIngleContactService");
 
 // TODO: create Contact
 const CreateContactController = (req, res) => {
@@ -28,16 +29,23 @@ const FetchContactsController = async (req, res) => {
 
 // TODO: edit Contact controller
 const EditContactsController = async (req, res) => {
-  const { ContactId } = req.params;
+  const { contactId } = req.params;
 
-  EditContactService(ContactId, req.body, res);
+  EditContactService(contactId, req.body, res);
 };
 
 // TODO: delete Contacts
 const DeleteContactsController = async (req, res) => {
-  const { ContactId } = req.params;
+  const { contactId } = req.params;
 
-  DeleteContactService(ContactId, res);
+  DeleteContactService(contactId, res);
+};
+
+// TODO: get single Contacts
+const SingleContactsController = async (req, res) => {
+  const { contactId } = req.params;
+
+  SingleContactService(contactId, res);
 };
 
 module.exports = {
@@ -45,4 +53,5 @@ module.exports = {
   EditContactsController,
   DeleteContactsController,
   FetchContactsController,
+  SingleContactsController,
 };

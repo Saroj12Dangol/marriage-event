@@ -5,25 +5,31 @@ const {
   FetchContactsController,
   EditContactsController,
   DeleteContactsController,
+  SingleContactsController,
 } = require("../controller/Contactontroller");
 
 const ContactRouter = express.Router();
 
-// TODO: post faqs router============
+// TODO: post contact router============
 ContactRouter.post("/", IsAdmin, CreateContactController);
 
-// TODO: get faqs router============
+// TODO: get contact router============
 ContactRouter.get("/", FetchContactsController);
 
 // ===========
 
-// TODO: edit faqs router============
-ContactRouter.put("/:faqId", IsAdmin, EditContactsController);
+// TODO: edit contact router============
+ContactRouter.put("/:contactId", IsAdmin, EditContactsController);
 
 // ===========
 
-// TODO: delete faqs router============
-ContactRouter.delete("/:faqId", IsAdmin, DeleteContactsController);
+// TODO: delete contact router============
+ContactRouter.delete("/:contactId", IsAdmin, DeleteContactsController);
+
+// ===========
+
+// TODO: single contact router============
+ContactRouter.get("/detail/:contactId", IsAdmin, SingleContactsController);
 
 // ===========
 
