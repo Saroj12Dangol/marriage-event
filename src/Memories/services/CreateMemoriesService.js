@@ -24,7 +24,11 @@ const CreateMemoriesService = async (eventId, req, res) => {
       images.push(imageResponse._id);
     }
 
-    const memories = new MemoriesModel(req.body);
+    const memories = new MemoriesModel({
+      guest: req.guest._id,
+      event: eventId,
+      day: req.body.day,
+    });
 
     memories.images = images;
 

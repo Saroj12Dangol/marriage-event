@@ -5,18 +5,23 @@ const IsGuestOfEvent = async (req, res, next) => {
   const { email } = req.body;
 
   if (!guestId && !email) {
-    res.status(400).json({
+    return res.status(400).json({
       message: "Email is required",
     });
+  }
+
+  const matchConditions = {};
+
+  if (email) {
+    matchConditions.email = email;
+  } else if (guestId) {
+    matchConditions.guestId = guestId;
   }
 
   try {
     const event = await EventModel.findById(eventId).populate({
       path: "guests",
-      $or: [
-        { email: email }, // Match by email
-        { _id: guestId }, // Match by _id (assuming req.body.email contains either email or _id)
-      ],
+      match: matchConditions,
     });
 
     if (event.guests.length === 0) {

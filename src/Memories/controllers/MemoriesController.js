@@ -8,7 +8,7 @@ const CreateMemoriesController = (req, res) => {
 
   // TODO: data validation ===========
   // Check if all required fields are present
-  const requiredFields = ["guest", "day"];
+  const requiredFields = ["email", "day"];
 
   const missingFields = requiredFields.filter((field) => !req.body[field]);
 

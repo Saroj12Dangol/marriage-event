@@ -7,6 +7,7 @@ const {
   EditMemoriesController,
   DeleteMemoryController,
 } = require("../controllers/MemoriesController");
+const { IsGuestOfEvent } = require("../../../middlewares/IsGuestOfEvent");
 
 const MemoriesRouter = express.Router();
 
@@ -14,6 +15,7 @@ const MemoriesRouter = express.Router();
 MemoriesRouter.post(
   "/:eventId",
   upload.fields([{ name: "images" }]),
+  IsGuestOfEvent,
   CreateMemoriesController
 );
 
