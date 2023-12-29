@@ -38,7 +38,9 @@ const {
   TravelRouter,
 } = require("./src/TravelDetails/routes/TravelDetailRoutes");
 const { FaqRouter } = require("./src/Faqs/routes/FaqRoutes");
-const { ContactRouter } = require("./src/EmergencyContact/routes/ContactRoutes");
+const {
+  ContactRouter,
+} = require("./src/EmergencyContact/routes/ContactRoutes");
 
 // ==============
 
@@ -93,6 +95,6 @@ app.get("/v1", (req, res) => {
   res.send("Welcome to marriage event management");
 });
 
-// cron.schedule("*/20 * * * * *", () => {
-//   updateStatusEvent();
-// });
+cron.schedule("0 0 * * *", () => {
+  updateStatusEvent();
+});

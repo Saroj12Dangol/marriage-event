@@ -1,4 +1,4 @@
-const EventModel = require("../src/Event/model/EventModel");
+const { EventModel } = require("../src/Event/model/EventModel");
 
 const IsGuestOfEvent = async (req, res, next) => {
   const { eventId, guestId = undefined } = req.params; //guestId for room allocation

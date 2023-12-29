@@ -1,8 +1,9 @@
+const AgencyModel = require("../../Agency/model/AgencyModel");
 const DaysModel = require("../../Days/model/DaysModel");
 const GuestModel = require("../../Guest/model/GuestModel");
 const MediaModel = require("../../Media/model/MediaModel");
 const MemoriesModel = require("../../Memories/model/MemoriesModel");
-const EventModel = require("../model/EventModel");
+const { EventModel } = require("../model/EventModel");
 
 const DeleteEventService = async (eventId, res) => {
   try {
@@ -70,6 +71,16 @@ const DeleteEventService = async (eventId, res) => {
     });
 
     const eventDeleted = await EventModel.deleteOne({ _id: eventId });
+
+    // Remove references from event Model
+    await AgencyModel.updateMany(
+      { $or: [{ event: eventId }] },
+      {
+        $unset: {
+          event: "",
+        },
+      }
+    );
 
     return res.status(200).json({
       message: "Event deleted successfully",

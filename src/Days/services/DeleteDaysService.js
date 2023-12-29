@@ -1,6 +1,4 @@
-const { ImageUploadHandler } = require("../../../utils/ImageUploadHandler");
-const EventModel = require("../../Event/model/EventModel");
-const MediaModel = require("../../Media/model/MediaModel");
+const { EventModel } = require("../../Event/model/EventModel");
 const {
   DeleteImageService,
 } = require("../../Media/services/DeleteImageService");

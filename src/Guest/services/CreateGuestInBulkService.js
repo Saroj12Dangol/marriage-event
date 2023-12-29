@@ -1,4 +1,4 @@
-const EventModel = require("../../Event/model/EventModel");
+const { EventModel } = require("../../Event/model/EventModel");
 const GuestModel = require("../model/GuestModel");
 
 const CreateGuestInBulkService = async (req, eventId, res) => {

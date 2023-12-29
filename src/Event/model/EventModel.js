@@ -104,6 +104,7 @@ const EventSchema = mongoose.Schema(
 
 // Function to update status based on startDateTime and endDateTime
 function updateStatusEvent() {
+  console.log("hello");
   const now = moment();
   mongoose
     .model("Event")
@@ -129,9 +130,9 @@ function updateStatusEvent() {
     });
 }
 
-// module.exports = {
-//   EventModel: mongoose.model("Event", EventSchema),
-//   updateStatusEvent,
-// };
+const EventModel = mongoose.model("Event", EventSchema);
 
-module.exports = mongoose.model("Event", EventSchema);
+module.exports = {
+  EventModel,
+  updateStatusEvent,
+};

@@ -1,7 +1,6 @@
-const { Queue } = require("bullmq");
 const { SendEmail } = require("../../../utils/Email");
 const Notification = require("../model/NotificationModel");
-const EventModel = require("../../Event/model/EventModel");
+const { EventModel } = require("../../Event/model/EventModel");
 
 const accommodationIndividualEmailsService = async ({
   subject,

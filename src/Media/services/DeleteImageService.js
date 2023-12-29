@@ -1,7 +1,7 @@
 const CloseFriendsModel = require("../../CloseFriends/model/CloseFriendsModel");
 const CoupleModel = require("../../Couple/model/CoupleModel");
 const DaysModel = require("../../Days/model/DaysModel");
-const EventModel = require("../../Event/model/EventModel");
+const { EventModel } = require("../../Event/model/EventModel");
 const LoveStoryModel = require("../../LoveStory/model/LoveStoryModel");
 const MemoriesModel = require("../../Memories/model/MemoriesModel");
 const TravelDetailModel = require("../../TravelDetails/model/TravelDetailModel");

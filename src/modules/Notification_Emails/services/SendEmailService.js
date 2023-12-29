@@ -1,3 +1,4 @@
+const { EventModel } = require("../../../Event/model/EventModel");
 const {
   InvitationEmail,
   AskTravelDetail,
@@ -11,7 +12,6 @@ const {
   travelStatusObj,
 } = require("../../../constants/statuses");
 const { SendEmail } = require("../../../utils/Email");
-const EventModel = require("../../Event/model/EventModel");
 const GuestModel = require("../../Guest/model/GuestModel");
 const NotificationModel = require("../model/NotificationModel");
 const { GetDaysInfoOfEventService } = require("./GetDaysInfoOfEventService");

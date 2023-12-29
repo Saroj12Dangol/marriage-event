@@ -1,5 +1,5 @@
 const { SendEmail } = require("../../../utils/Email");
-const EventModel = require("../../Event/model/EventModel");
+const { EventModel } = require("../../Event/model/EventModel");
 const Notification = require("../model/NotificationModel");
 
 const accommodationEmailService = async ({

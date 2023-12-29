@@ -1,5 +1,5 @@
 const { ImageUploadHandler } = require("../../../utils/ImageUploadHandler");
-const EventModel = require("../../Event/model/EventModel");
+const { EventModel } = require("../../Event/model/EventModel");
 const MediaModel = require("../../Media/model/MediaModel");
 const LoveStoryModel = require("../model/LoveStoryModel");
 

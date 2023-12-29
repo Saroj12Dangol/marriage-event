@@ -1,6 +1,6 @@
 const { ImageUploadHandler } = require("../../../utils/ImageUploadHandler");
 const MediaModel = require("../../Media/model/MediaModel");
-const EventModel = require("../model/EventModel");
+const { EventModel } = require("../model/EventModel");
 
 const CreateEventService = async (req, res) => {
   try {

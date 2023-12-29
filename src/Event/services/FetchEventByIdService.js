@@ -1,4 +1,4 @@
-const EventModel = require("../model/EventModel");
+const { EventModel } = require("../model/EventModel");
 
 const FetchEventByIdService = async (eventId, res, populateObj) => {
   try {

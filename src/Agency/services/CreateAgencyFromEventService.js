@@ -1,4 +1,4 @@
-const EventModel = require("../../Event/model/EventModel");
+const { EventModel } = require("../../Event/model/EventModel");
 const AgencyModel = require("../model/AgencyModel");
 
 const CreateAgencyServiceFromEventService = async (req, eventId, res) => {
