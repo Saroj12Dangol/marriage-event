@@ -69,7 +69,7 @@ const SendEmail = async ({
           : purpose === "forgot-password"
           ? ForgotPasswordTemplate(subject, text, link)
           : purpose === purposeObj.daysInformation
-          ? dayInfoTemplate(subject, text, link)
+          ? dayInfoTemplate(subject, text, days, eventTitle)
           : null,
     });
   } catch (error) {

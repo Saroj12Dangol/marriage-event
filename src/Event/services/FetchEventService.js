@@ -3,6 +3,7 @@ const { EventModel } = require("../model/EventModel");
 const FetchEventService = async (res, populateObj, page, limit, skip) => {
   // TODO: post event in database
 
+
   try {
     const event = await EventModel.find({})
       .skip(skip)

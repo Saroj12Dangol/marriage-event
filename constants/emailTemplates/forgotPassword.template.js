@@ -1,5 +1,5 @@
 // HTML email template
-const ForgotPasswordTemplate = (subject, text, eventId, eventTitle) => `
+const ForgotPasswordTemplate = (subject, text, link) => `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,15 +49,13 @@ const ForgotPasswordTemplate = (subject, text, eventId, eventTitle) => `
     </style>
 </head>
 <body>
-    <div class="event-title-container">
-        <p class="event-title">${eventTitle}</p>
-    </div>
+   
     <header>
         <h1>${subject}</h1>
     </header>
     <div style="padding: 20px;">
         <p>${text}</p>
-        <a href="${process.env.FORGOT_PASSWORD_URL}/${eventId}" style="text-decoration: none;">CLICK HERE</a>
+        <a href="${link}" style="text-decoration: none;">RESET PASSWORD</a>
     </div>
 </body>
 </html>

@@ -47,7 +47,7 @@ const FetchEventController = async (req, res) => {
   const pg = parseInt(req.query.page) || page;
   const lmt = parseInt(req.query.limit) || limit;
 
-  const skip = (page - 1) * limit;
+  const skip = (pg - 1) * lmt;
 
   FetchEventService(res, populateObj, pg, lmt, skip);
 };
@@ -56,7 +56,6 @@ const FetchEventController = async (req, res) => {
 
 const FetchEventByIdController = async (req, res) => {
   const { eventId } = req.params;
-
 
   let populateObj = [];
   if (req.query.populate) {
