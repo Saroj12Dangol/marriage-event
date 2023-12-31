@@ -1,5 +1,7 @@
 const { purposeEnum } = require("../../../constants/enums");
-const { accommodationEmailService } = require("../services/AccommodationEmailService");
+const {
+  accommodationEmailService,
+} = require("../services/AccommodationEmailService");
 const {
   accommodationIndividualEmailsService,
 } = require("../services/AccomodationIndividualEmail");
@@ -12,7 +14,6 @@ const {
 const { SendEmailService } = require("../services/SendEmailService");
 
 // TODO: email controller
-
 
 // TODO:
 const SendDaysInfoEmailController = async (req, res) => {
