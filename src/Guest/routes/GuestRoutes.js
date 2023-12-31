@@ -8,6 +8,7 @@ const {
   CreateGuestInBulkController,
   AllocationRoomController,
   AcceptInvitationGuestController,
+  GuestReceivedController,
 } = require("../controllers/GuestController");
 const IsAdmin = require("../../../middlewares/AdminProtect");
 const { IsGuestOfEvent } = require("../../../middlewares/IsGuestOfEvent");
@@ -62,7 +63,12 @@ GuestRouter.patch(
 );
 
 // TODO: allocate hotel room to guest
-GuestRouter.patch("/add-room/:guestId", AllocationRoomController);
+// GuestRouter.patch("/add-room/:guestId", AllocationRoomController);
+
+// // ===========
+
+// TODO: make guest received by agency
+GuestRouter.patch("/received/:guestId", GuestReceivedController);
 
 // ===========
 
@@ -75,7 +81,7 @@ GuestRouter.put(
 
 // ===========
 
-// TODO: reject the invitation
+// TODO: allocate hotel room to guest
 
 GuestRouter.patch(
   "/add-room/:guestId/:eventId",

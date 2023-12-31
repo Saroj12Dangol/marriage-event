@@ -10,6 +10,7 @@ const { CreateGuestService } = require("../services/CreateGuestService");
 const { DeleteGuestService } = require("../services/DeleteGuestService");
 const { EditGuestService } = require("../services/EditGuestService");
 const { FetchGuestService } = require("../services/FetchGuestService");
+const { GuestReceivedService } = require("../services/GuestReceived.service");
 const { RoomAssignService } = require("../services/RoomAssignService");
 const {
   ToggleGuestEventStatusService,
@@ -98,6 +99,13 @@ const ToggleGuestEventStatusController = async (req, res) => {
   }
 };
 
+// TODO: guest received
+
+const GuestReceivedController = async (req, res) => {
+  const { guestId } = req.params;
+  GuestReceivedService(guestId, res);
+};
+
 // TODO: allocate room
 
 const AllocationRoomController = async (req, res) => {
@@ -176,4 +184,5 @@ module.exports = {
   CreateGuestInBulkController,
   AllocationRoomController,
   AcceptInvitationGuestController,
+  GuestReceivedController,
 };
