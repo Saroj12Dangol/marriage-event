@@ -14,7 +14,7 @@ const ChangePwTeamService = async (teamId, newPassword, oldPassword, res) => {
     const isPasswordMatch = await bcrypt.compare(oldPassword, team.password);
 
     if (!isPasswordMatch) {
-      return res.status(401).json({
+      return res.status(400).json({
         success: false,
         message: "Incorrect old password",
       });
