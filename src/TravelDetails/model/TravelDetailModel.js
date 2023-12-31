@@ -27,6 +27,10 @@ const TravelDetailSchema = mongoose.Schema(
       type: String,
     },
 
+    departurePlace: {
+      type: String,
+    },
+
     email: {
       type: String,
     },

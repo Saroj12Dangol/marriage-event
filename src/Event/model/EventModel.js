@@ -102,37 +102,53 @@ const EventSchema = mongoose.Schema(
   }
 );
 
-// Function to update status based on startDateTime and endDateTime
-function updateStatusEvent() {
-  console.log("hello");
+// Pre-save middleware to update status based on startDateTime and endDateTime
+EventSchema.pre("save", function (next) {
   const now = moment();
-  mongoose
-    .model("Event")
-    .find()
-    .then((events) => {
-      events.forEach((event) => {
-        if (
-          event.startDateTime &&
-          moment(event.startDateTime).isSameOrBefore(now)
-        ) {
-          event.status = "ongoing";
-        }
-        if (
-          event.endDateTime &&
-          moment(event.endDateTime).isSameOrBefore(now)
-        ) {
-          event.status = "completed";
-        }
-        event.save().catch((err) => {
-          console.error(`Error updating status for event ${event._id}:`, err);
-        });
-      });
-    });
-}
+
+  // Update status for ongoing events
+  if (this.startDateTime && moment(this.startDateTime).isSameOrBefore(now)) {
+    this.status = "ongoing";
+  }
+
+  // Update status for completed events
+  if (this.endDateTime && moment(this.endDateTime).isSameOrBefore(now)) {
+    this.status = "completed";
+  }
+
+  next(); // Continue with the save operation
+});
+
+// // Function to update status based on startDateTime and endDateTime
+// function updateStatusEvent() {
+//   const now = moment();
+//   mongoose
+//     .model("Event")
+//     .find()
+//     .then((events) => {
+//       events.forEach((event) => {
+//         if (
+//           event.startDateTime &&
+//           moment(event.startDateTime).isSameOrBefore(now)
+//         ) {
+//           event.status = "ongoing";
+//         }
+//         if (
+//           event.endDateTime &&
+//           moment(event.endDateTime).isSameOrBefore(now)
+//         ) {
+//           event.status = "completed";
+//         }
+//         event.save().catch((err) => {
+//           console.error(`Error updating status for event ${event._id}:`, err);
+//         });
+//       });
+//     });
+// }
 
 const EventModel = mongoose.model("Event", EventSchema);
 
 module.exports = {
   EventModel,
-  updateStatusEvent,
+  // updateStatusEvent,
 };

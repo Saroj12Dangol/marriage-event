@@ -57,7 +57,7 @@ const agencyTemplate = (subject, text, eventId, eventTitle) => `
     </header>
     <div style="padding: 20px;">
         <p>${text}</p>
-        <a href="${process.env.AGENCY_URL}?eventId=${eventId}" style="text-decoration: none;">CLICK HERE</a>
+        <a href="${process.env.AGENCY_URL}/${eventId}" style="text-decoration: none;">CLICK HERE</a>
     </div>
 </body>
 </html>
