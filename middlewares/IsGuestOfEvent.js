@@ -24,8 +24,10 @@ const IsGuestOfEvent = async (req, res, next) => {
       match: matchConditions,
     });
 
+    console.log(event?.guests, "guests");
     if (event.guests.length === 0) {
-      return res.status(404).json({
+      return res.status(400).json({
+        success: false,
         message: `${req.body.email || guestId} is not valid for this event.`,
       });
     }
