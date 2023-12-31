@@ -29,7 +29,8 @@ const CreateEventService = async (req, res) => {
       data: event,
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(400).json({
+      success: false,
       message: error.message,
     });
   }

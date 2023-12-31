@@ -1,7 +1,6 @@
 const FaqModel = require("../model/FaqModel");
 
 const CreateFaqsService = async (req, res) => {
-  console.log(req.body);
   try {
     const faq = new FaqModel(req.body);
 
@@ -11,7 +10,8 @@ const CreateFaqsService = async (req, res) => {
       data: faq,
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(400).json({
+      success: false,
       message: error.message,
     });
   }

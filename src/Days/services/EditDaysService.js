@@ -34,7 +34,8 @@ const EditDaysService = async (dayId, file, body, populateObj, res) => {
       data: day,
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(400).json({
+      success: false,
       message: error.message,
     });
   }

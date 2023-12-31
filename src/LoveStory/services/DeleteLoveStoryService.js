@@ -30,7 +30,8 @@ const DeleteLoveStoryService = async (loveStoryId, res) => {
       message: `${loveStoryId} is deleted.`,
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(400).json({
+      success: false,
       message: error.message,
     });
   }
