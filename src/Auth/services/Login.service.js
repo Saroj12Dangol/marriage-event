@@ -1,8 +1,7 @@
 const bcrypt = require("bcryptjs");
-
-const TeamModel = require("../model/TeamModel");
-const generateToken = require("../../../utils/generateToken");
+const TeamModel = require("../../Team/model/TeamModel");
 const AgencyModel = require("../../Agency/model/AgencyModel");
+const generateToken = require("../../../utils/generateToken");
 
 const LoginService = async (email, password, res) => {
   try {
