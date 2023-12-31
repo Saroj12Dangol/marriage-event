@@ -27,7 +27,7 @@ const GuestSchema = mongoose.Schema(
       default: "guest",
     },
 
-    room: {
+    roomNo: {
       type: String,
     },
 
