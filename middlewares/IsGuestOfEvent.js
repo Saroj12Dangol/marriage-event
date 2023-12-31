@@ -15,8 +15,9 @@ const IsGuestOfEvent = async (req, res, next) => {
   if (email) {
     matchConditions.email = email;
   } else if (guestId) {
-    matchConditions.guestId = guestId;
+    matchConditions._id = guestId;
   }
+
 
   try {
     const event = await EventModel.findById(eventId).populate({

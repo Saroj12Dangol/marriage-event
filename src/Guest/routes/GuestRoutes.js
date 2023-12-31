@@ -63,9 +63,9 @@ GuestRouter.patch(
 );
 
 // TODO: allocate hotel room to guest
-GuestRouter.patch("/add-room/:guestId", AllocationRoomController);
+// GuestRouter.patch("/add-room/:guestId", AllocationRoomController);
 
-// ===========
+// // ===========
 
 // TODO: make guest received by agency
 GuestRouter.patch("/received/:guestId", GuestReceivedController);
@@ -81,7 +81,7 @@ GuestRouter.put(
 
 // ===========
 
-// TODO: reject the invitation
+// TODO: allocate hotel room to guest
 
 GuestRouter.patch(
   "/add-room/:guestId/:eventId",
