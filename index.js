@@ -41,6 +41,7 @@ const { FaqRouter } = require("./src/Faqs/routes/FaqRoutes");
 const {
   ContactRouter,
 } = require("./src/EmergencyContact/routes/ContactRoutes");
+const { AuthRouter } = require("./src/Auth/routes/AuthRoutes");
 
 // ==============
 
@@ -90,6 +91,7 @@ app.use("/v1/friends", CloseFriendsRouter);
 app.use("/v1/travel", TravelRouter);
 app.use("/v1/faq", FaqRouter);
 app.use("/v1/contact", ContactRouter);
+app.use("/v1/auth", AuthRouter);
 
 app.get("/v1", (req, res) => {
   res.send("Welcome to marriage event management");

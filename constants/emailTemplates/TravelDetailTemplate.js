@@ -57,7 +57,7 @@ const TravelDetailTemplate = (subject, text, eventId, eventTitle) => `
     </header>
     <div style="padding: 20px;">
         <p>${text}</p>
-        <a href="${process.env.TRAVEL_DETAIL_URL}?eventId=${eventId}" style="text-decoration: none;">CLICK HERE</a>
+        <a href="${process.env.TRAVEL_DETAIL_URL}/${eventId}" style="text-decoration: none;">CLICK HERE</a>
     </div>
 </body>
 </html>

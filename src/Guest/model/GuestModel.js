@@ -35,6 +35,10 @@ const GuestSchema = mongoose.Schema(
       type: String,
     },
 
+    message: {
+      type: String,
+    },
+
     checkInDate: {
       type: Date,
     },

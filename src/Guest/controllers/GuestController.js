@@ -159,7 +159,7 @@ const AcceptInvitationGuestController = async (req, res) => {
 
   if (missingFields.length > 0) {
     return res.status(400).json({
-      error: `Missing required fields: ${missingFields.join(", ")}`,
+      message: `Missing required fields: ${missingFields.join(", ")}`,
     });
   }
 

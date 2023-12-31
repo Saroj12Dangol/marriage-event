@@ -6,6 +6,8 @@ const {
   DeleteAgencyController,
   createAgencyFronEventController,
   FetchAgencyByIdController,
+  ChangePwAgencyController,
+  LoginAgencyController,
 } = require("../controllers/AgencyController");
 const IsAdmin = require("../../../middlewares/AdminProtect");
 
@@ -13,12 +15,21 @@ const AgencyRouter = express.Router();
 
 // TODO: post agency from event controller============
 
-AgencyRouter.post("/:eventId", IsAdmin, createAgencyFronEventController);
+AgencyRouter.post(
+  "/add-to-event/:eventId",
+  IsAdmin,
+  createAgencyFronEventController
+);
 // =========
 
 // TODO: post agency independent of event controller============
 
 AgencyRouter.post("/", IsAdmin, createAgencyController);
+// =========
+
+// TODO: login agency controller============
+
+AgencyRouter.post("/login", LoginAgencyController);
 // =========
 
 // TODO: get agency controller
@@ -40,5 +51,8 @@ AgencyRouter.delete("/:agencyId", IsAdmin, DeleteAgencyController);
 
 AgencyRouter.get("/detail/:agencyId", IsAdmin, FetchAgencyByIdController);
 // ===========
+
+// TODO: change pw of agency controller
+AgencyRouter.patch("/change-password/:agencyId", ChangePwAgencyController);
 
 module.exports = { AgencyRouter };

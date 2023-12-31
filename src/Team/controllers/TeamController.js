@@ -1,3 +1,4 @@
+const { ChangePwTeamService } = require("../services/ChangePwTeamService");
 const { CreateTeamService } = require("../services/CreateTeamService");
 const { DeleteTeamService } = require("../services/DeleteTeamService");
 const { EditTeamService } = require("../services/EditTeamService");
@@ -100,11 +101,31 @@ const FetchTeamByIdController = async (req, res) => {
   FetchTeamByIdService(teamId, res, populateObj);
 };
 
-// TODO: agency edit controller
+// TODO: delete team controller
 
 const DeleteTeamController = async (req, res) => {
   const { teamId } = req.params;
   DeleteTeamService(teamId, res);
+};
+
+// TODO: change pw of team member controller
+
+const ChangePwTeamController = async (req, res) => {
+  const { teamId } = req.params;
+  const { newPassword, oldPassword } = req.body;
+
+  const requiredFields = ["newPassword", "oldPassword"];
+
+  const missingFields = requiredFields.filter((field) => !req.body[field]);
+
+  if (missingFields.length > 0) {
+    return res.status(400).json({
+      success: false,
+      error: `Missing required fields: ${missingFields.join(", ")}`,
+    });
+  }
+
+  ChangePwTeamService(teamId, newPassword, oldPassword, res);
 };
 
 module.exports = {
@@ -115,4 +136,5 @@ module.exports = {
   EditTeamController,
   FetchTeamByIdController,
   DeleteTeamController,
+  ChangePwTeamController,
 };
