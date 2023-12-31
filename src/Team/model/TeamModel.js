@@ -33,6 +33,13 @@ const TeamSchema = mongoose.Schema(
     token: {
       type: String,
     },
+
+    resetToken: {
+      type: String,
+      default: undefined,
+    },
+
+    
   },
   {
     timestamps: true,

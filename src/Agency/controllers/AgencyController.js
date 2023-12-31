@@ -1,15 +1,15 @@
-const { ChangePwAgencyService } = require("../services/ChangePwAgencyService");
+const { ChangePwAgencyService } = require("../services/ChangePwAgency.service");
 const {
   CreateAgencyServiceFromEventService,
-} = require("../services/CreateAgencyFromEventService");
-const { CreateAgencyService } = require("../services/CreateAgencyService");
-const { DeleteAgencyService } = require("../services/DeleteAgencyService");
-const { EditAgencyService } = require("../services/EditAgencyService");
+} = require("../services/CreateAgencyFromEvent.service");
+const { CreateAgencyService } = require("../services/CreateAgency.service");
+const { DeleteAgencyService } = require("../services/DeleteAgency.service");
+const { EditAgencyService } = require("../services/EditAgency.service");
 const {
   FetchAgencyByIdService,
-} = require("../services/FetchAgencyByIdService");
-const { fetchAgencyService } = require("../services/FetchAgencyService");
-const { LoginAgencyService } = require("../services/LoginAgencyService");
+} = require("../services/FetchAgencyById.service");
+const { fetchAgencyService } = require("../services/FetchAgency.service");
+const { LoginAgencyService } = require("../services/LoginAgency.service");
 
 const createAgencyFronEventController = async (req, res) => {
   const { eventId } = req.params;

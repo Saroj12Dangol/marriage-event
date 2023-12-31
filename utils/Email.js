@@ -15,6 +15,9 @@ const { purposeObj } = require("../constants/statuses");
 const {
   TravelDetailTemplate,
 } = require("../constants/emailTemplates/TravelDetailTemplate");
+const {
+  ForgotPasswordTemplate,
+} = require("../constants/emailTemplates/forgotPassword.template");
 
 const SendEmail = async ({
   emails,
@@ -28,6 +31,7 @@ const SendEmail = async ({
   room,
   checkInDate,
   checkoutDate,
+  link,
 }) => {
   var mail_transport_mail_transport = mailer.createTransport({
     host: process.env.EMAIL_HOST,
@@ -62,7 +66,11 @@ const SendEmail = async ({
           : purpose === purposeObj.askTravelDetail ||
             purposeObj.alertAskTravelDetail
           ? TravelDetailTemplate(subject, text, eventId, eventTitle)
-          : dayInfoTemplate(subject, text, days, eventTitle),
+          : purpose === "forgot-password"
+          ? ForgotPasswordTemplate(subject, text, link)
+          : purpose === purposeObj.daysInformation
+          ? dayInfoTemplate(subject, text, link)
+          : null,
     });
   } catch (error) {
     throw new Error(error.message);

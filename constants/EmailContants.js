@@ -28,11 +28,17 @@ const RoomAssigned = {
   text: "Text for ask for  room assigned",
 };
 
+const ForgotPassword = {
+  subject: "Subject for ask for forgot password",
+  text: "Text for ask for forgot password",
+};
+
 module.exports = {
   InvitationEmail,
   AskTravelDetail,
   AlertInvitationEmail,
   AlertAskTravelDetail,
   TravelAgency,
-  RoomAssigned
+  RoomAssigned,
+  ForgotPassword,
 };

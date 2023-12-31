@@ -1,3 +1,4 @@
+const AgencyModel = require("../../Agency/model/AgencyModel");
 const TeamModel = require("../model/TeamModel");
 
 const CreateTeamService = async (req, res) => {
@@ -8,7 +9,11 @@ const CreateTeamService = async (req, res) => {
       email,
     });
 
-    if (user) {
+    const userAgency = await AgencyModel.findOne({
+      email,
+    });
+
+    if (user || userAgency) {
       return res.status(400).json({
         error: `${email} already exists.`,
       });

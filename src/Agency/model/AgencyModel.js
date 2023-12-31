@@ -37,6 +37,11 @@ const AgencySchema = mongoose.Schema(
       type: mongoose.Schema.ObjectId,
       ref: "Event",
     },
+
+    resetToken: {
+      type: String,
+      default: undefined,
+    },
   },
   {
     timestamps: true,

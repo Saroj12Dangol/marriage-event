@@ -161,7 +161,6 @@ const SendEmailService = async (purpose, eventId, res) => {
 
       const emails = guests.map((g) => g.email);
 
-      console.log(emails, "ema");
       const guestIds = guests.map((g) => g._id);
 
       // return res.json({
