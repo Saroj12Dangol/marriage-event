@@ -28,6 +28,11 @@ const AgencySchema = mongoose.Schema(
       type: String,
     },
 
+    role: {
+      type: String,
+      default: "agency",
+    },
+
     event: {
       type: mongoose.Schema.ObjectId,
       ref: "Event",

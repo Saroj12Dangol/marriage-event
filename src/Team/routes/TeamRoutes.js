@@ -7,11 +7,9 @@ const {
   FetchTeamByIdController,
   DeleteTeamController,
   EditTeamController,
+  ChangePwTeamController,
 } = require("../controllers/TeamController");
 const IsAdmin = require("../../../middlewares/AdminProtect");
-const {
-  EditGuestController,
-} = require("../../Guest/controllers/GuestController");
 
 const TeamRouter = express.Router();
 
@@ -51,5 +49,8 @@ TeamRouter.get("/detail/:teamId", IsAdmin, FetchTeamByIdController);
 
 // TODO: delete team controller
 TeamRouter.delete("/:teamId", IsAdmin, DeleteTeamController);
+
+// TODO: change pw of team controller
+TeamRouter.patch("/change-password/:teamId", IsAdmin, ChangePwTeamController);
 
 module.exports = { TeamRouter };
