@@ -4,10 +4,6 @@ const { DeleteTeamService } = require("../services/DeleteTeamService");
 const { EditTeamService } = require("../services/EditTeamService");
 const { FetchTeamByIdService } = require("../services/FetchTeamByIdService");
 const { FetchTeamService } = require("../services/FetchTeamService");
-const {
-  GetLoggedInUserService,
-} = require("../services/GetLoggedInUserService");
-const { LoginTeamService } = require("../services/LoginTeamService");
 
 const CreateTeamController = async (req, res) => {
   // TODO: data validation ===========
@@ -64,31 +60,6 @@ const EditTeamController = async (req, res) => {
   EditTeamService(teamId, req, res);
 };
 
-const LoginTeamController = async (req, res) => {
-  const requiredFields = ["email", "password"];
-
-  const { email, password } = req.body;
-
-  const missingFields = requiredFields.filter((field) => !req.body[field]);
-
-  if (missingFields.length > 0) {
-    return res.status(400).json({
-      success: false,
-      error: `Missing required fields: ${missingFields.join(", ")}`,
-    });
-  }
-
-  // TODO: =================
-  LoginTeamService(email, password, res);
-};
-
-const GetLoggedInUserController = async (req, res) => {
-  const tokenWith = req.headers.authorization || ""; //TODO: get the token from the cookies from frontend.
-  const token = tokenWith.substring("Bearer ".length);
-  // TODO: =================
-  GetLoggedInUserService(token, res);
-};
-
 // TODO: fetch team detail
 
 const FetchTeamByIdController = async (req, res) => {
@@ -131,8 +102,6 @@ const ChangePwTeamController = async (req, res) => {
 module.exports = {
   CreateTeamController,
   fetchTeamController,
-  LoginTeamController,
-  GetLoggedInUserController,
   EditTeamController,
   FetchTeamByIdController,
   DeleteTeamController,

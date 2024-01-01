@@ -2,8 +2,6 @@ const express = require("express");
 const {
   CreateTeamController,
   fetchTeamController,
-  LoginTeamController,
-  GetLoggedInUserController,
   FetchTeamByIdController,
   DeleteTeamController,
   EditTeamController,
@@ -29,16 +27,6 @@ TeamRouter.get("/", IsAdmin, fetchTeamController);
 TeamRouter.put("/:teamId", IsAdmin, EditTeamController);
 
 // ===========
-
-// TODO: login team
-
-TeamRouter.post("/login", LoginTeamController);
-
-// ===========
-
-// TODO: get loggedinuser team
-
-TeamRouter.get("/getloggedinuser", GetLoggedInUserController);
 
 // ===========
 
