@@ -37,15 +37,13 @@ const ForgotPasswordService = async (email, res) => {
       await agency.save();
     }
 
-    // SendEmail({
-    //   emails: [email],
-    //   purpose: "forgot-password",
-    //   link: `${process.env.FORGOT_PASSWORD_URL}?token=${resetToken}&id=${
-    //     team?._id || agency?._id
-    //   }`,
-    //   subject: ForgotPassword.subject,
-    //   text: ForgotPassword.text,
-    // });
+    SendEmail({
+      emails: [email],
+      purpose: "forgot-password",
+      link: `${process.env.FORGOT_PASSWORD_URL}?token=${resetToken}`,
+      subject: ForgotPassword.subject,
+      text: ForgotPassword.text,
+    });
 
     return res.status(200).json({
       message: `Email sent to ${email}`,
