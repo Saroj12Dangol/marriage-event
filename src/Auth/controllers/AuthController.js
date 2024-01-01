@@ -1,5 +1,7 @@
 const { ForgotPasswordService } = require("../services/ForgotPassword.service");
-const { GetLoggedInUserService } = require("../services/GetLoggedInUser.service");
+const {
+  GetLoggedInUserService,
+} = require("../services/GetLoggedInUser.service");
 const { LoginService } = require("../services/Login.service");
 const { ResetPasswordService } = require("../services/ResetPassword.service");
 
@@ -72,6 +74,7 @@ const GetLoggedInUserController = async (req, res) => {
   // TODO: =================
   GetLoggedInUserService(token, res);
 };
+
 module.exports = {
   ForgotPasswordController,
   ResetPasswordController,
