@@ -1,52 +1,59 @@
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const AgencyModel = require("../../Agency/model/AgencyModel");
 const TeamModel = require("../../Team/model/TeamModel");
 
-const ResetPasswordService = async (userId, token, newPassword, res) => {
+const ResetPasswordService = async (token, newPassword, res) => {
   try {
-    const team = await TeamModel.findById(userId);
-    const agency = await AgencyModel.findById(userId);
+    // Verify the token
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    const team = await TeamModel.findById(decodedToken.id);
+
+    const agency = await AgencyModel.findById(decodedToken.id);
 
     if (!team && !agency) {
       return res.status(404).json({
         status: false,
-        message: `${userId} is not found in our system`,
+        message: `Your token is invalid or expired`,
       });
     }
 
-    let isTokenMatch;
+    // Token is valid, check expiration
+    const currentTimestamp = Math.floor(Date.now() / 1000);
+    if (decodedToken.exp && decodedToken.exp < currentTimestamp) {
+      return res.status(400).json({
+        success: false,
+        message: "Your token is invalid or expired",
+      });
+    }
 
     if (team) {
-      isTokenMatch = await bcrypt.compare(token, team.resetToken);
-      if (isTokenMatch) {
-        team.password = newPassword;
-        await team.save();
-        return res.status(201).json({
-          message: "Your password has been reset",
-        });
-      } else {
-        return res.status(401).json({
+      if (token !== team.resetToken) {
+        return res.status(400).json({
           success: false,
           message: "Your token is invalid or expired",
         });
       }
+      team.password = newPassword;
+      await team.save();
+      return res.status(201).json({
+        message: "Your password has been reset",
+      });
     }
 
     if (agency) {
-      isTokenMatch = await bcrypt.compare(token, agency.resetToken);
-      if (isTokenMatch) {
-        agency.password = newPassword;
-        await agency.save();
-        return res.status(201).json({
-          message: "Your password has been reset",
-        });
-      } else {
-        return res.status(401).json({
+      if (token !== agency.resetToken) {
+        return res.status(400).json({
           success: false,
           message: "Your token is invalid or expired",
         });
       }
+      agency.password = newPassword;
+      await agency.save();
+      return res.status(201).json({
+        message: "Your password has been reset",
+      });
     }
   } catch (error) {
     return res.status(400).json({

@@ -1,5 +1,4 @@
-const crypto = require("crypto");
-const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const AgencyModel = require("../../Agency/model/AgencyModel");
 const TeamModel = require("../../Team/model/TeamModel");
@@ -20,34 +19,37 @@ const ForgotPasswordService = async (email, res) => {
 
     // TODO: generate the reset token
 
-    const resetToken = crypto.randomBytes(32).toString("hex");
-
-    const salt = await bcrypt.genSalt(10);
-
-    const hashResetToken = await bcrypt.hash(resetToken, Number(salt));
+    const resetToken = jwt.sign(
+      { id: team ? team._id : agency._id },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "600000",
+      }
+    );
 
     if (team) {
-      team.resetToken = hashResetToken;
+      team.resetToken = resetToken;
       await team.save();
     }
 
     if (agency) {
-      agency.resetToken = hashResetToken;
+      agency.resetToken = resetToken;
       await agency.save();
     }
 
-    SendEmail({
-      emails: [email],
-      purpose: "forgot-password",
-      link: `${process.env.FORGOT_PASSWORD_URL}?token=${resetToken}&id=${
-        team?._id || agency?._id
-      }`,
-      subject: ForgotPassword.subject,
-      text: ForgotPassword.text,
-    });
+    // SendEmail({
+    //   emails: [email],
+    //   purpose: "forgot-password",
+    //   link: `${process.env.FORGOT_PASSWORD_URL}?token=${resetToken}&id=${
+    //     team?._id || agency?._id
+    //   }`,
+    //   subject: ForgotPassword.subject,
+    //   text: ForgotPassword.text,
+    // });
 
     return res.status(200).json({
       message: `Email sent to ${email}`,
+      link: `${process.env.FORGOT_PASSWORD_URL}?token=${resetToken}`,
     });
   } catch (error) {
     return res.status(400).json({

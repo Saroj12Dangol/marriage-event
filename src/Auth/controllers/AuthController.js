@@ -30,7 +30,7 @@ const ForgotPasswordController = (req, res) => {
 const ResetPasswordController = (req, res) => {
   // TODO: data validation ===========
   // Check if all required fields are present
-  const requiredFields = ["userId", "token", "newPassword"];
+  const requiredFields = ["token", "newPassword"];
 
   const missingFields = requiredFields.filter((field) => !req.body[field]);
 
@@ -41,9 +41,9 @@ const ResetPasswordController = (req, res) => {
     });
   }
 
-  const { userId, token, newPassword } = req.body;
+  const { token, newPassword } = req.body;
 
-  ResetPasswordService(userId, token, newPassword, res);
+  ResetPasswordService(token, newPassword, res);
 };
 
 // TODO: reset password
