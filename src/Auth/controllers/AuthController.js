@@ -1,4 +1,5 @@
 const { ForgotPasswordService } = require("../services/ForgotPassword.service");
+const { LoginService } = require("../services/Login.service");
 const { ResetPasswordService } = require("../services/ResetPassword.service");
 
 // TODO: send link to forgot password
@@ -41,7 +42,29 @@ const ResetPasswordController = (req, res) => {
 
   ResetPasswordService(userId, token, newPassword, res);
 };
+
+// TODO: reset password
+
+const LoginController = (req, res) => {
+  // TODO: data validation ===========
+  // Check if all required fields are present
+  const requiredFields = ["email", "password"];
+
+  const { email, password } = req.body;
+
+  const missingFields = requiredFields.filter((field) => !req.body[field]);
+
+  if (missingFields.length > 0) {
+    return res.status(400).json({
+      success: false,
+      error: `Missing required fields: ${missingFields.join(", ")}`,
+    });
+  }
+
+  LoginService(email, password, res);
+};
 module.exports = {
   ForgotPasswordController,
   ResetPasswordController,
+  LoginController,
 };
