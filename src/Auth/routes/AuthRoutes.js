@@ -3,6 +3,7 @@ const {
   ForgotPasswordController,
   ResetPasswordController,
   LoginController,
+  GetLoggedInUserController,
 } = require("../controllers/AuthController");
 
 const AuthRouter = express.Router();
@@ -15,5 +16,11 @@ AuthRouter.post("/reset-password", ResetPasswordController);
 
 // TODO: reset password router============
 AuthRouter.post("/login", LoginController);
+
+// TODO: get loggedinuser
+
+AuthRouter.get("/getloggedinuser", GetLoggedInUserController);
+
+// ===========
 
 module.exports = { AuthRouter };
