@@ -9,7 +9,6 @@ const SendEmail = async ({ emails, subject, text, purpose, template }) => {
     },
   });
 
-  console.log(purpose, "purpose");
   try {
     await mail_transport_mail_transport.sendMail({
       from: process.env.EMAIL_SENDER,

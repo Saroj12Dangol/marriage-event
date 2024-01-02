@@ -1,5 +1,8 @@
 const { ImageUploadHandler } = require("../../../utils/ImageUploadHandler");
 const MediaModel = require("../../Media/model/MediaModel");
+const {
+  DeleteImageService,
+} = require("../../Media/services/DeleteImageService");
 const { EventModel } = require("../model/EventModel");
 
 const EditEventService = async (eventId, req, res) => {
@@ -16,6 +19,14 @@ const EditEventService = async (eventId, req, res) => {
       });
     }
 
+    for (const img of updatedEvent.backgrounds) {
+      await DeleteImageService(img, res, false);
+    }
+
+    updatedEvent.backgrounds = [];
+
+    const bgDeletedEvent = await updatedEvent.save();
+
     if (req.files.backgrounds) {
       for (const image of req.files.backgrounds) {
         const img = await ImageUploadHandler(image, res);
@@ -24,11 +35,11 @@ const EditEventService = async (eventId, req, res) => {
         });
 
         await imageResponse.save();
-        updatedEvent.backgrounds.push(imageResponse._id);
+        bgDeletedEvent.backgrounds.push(imageResponse._id);
       }
     }
 
-    await updatedEvent.save();
+    await bgDeletedEvent.save();
 
     const event = await EventModel.findById(eventId).populate("backgrounds");
 
