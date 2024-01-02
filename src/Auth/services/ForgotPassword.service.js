@@ -4,6 +4,10 @@ const AgencyModel = require("../../Agency/model/AgencyModel");
 const TeamModel = require("../../Team/model/TeamModel");
 const { SendEmail } = require("../../../utils/Email");
 const { ForgotPassword } = require("../../../constants/EmailContants");
+const { purposeObj } = require("../../../constants/statuses");
+const {
+  ForgotPasswordTemplate,
+} = require("../../../constants/emailTemplates/forgotPassword.template");
 
 const ForgotPasswordService = async (email, res) => {
   try {
@@ -39,10 +43,11 @@ const ForgotPasswordService = async (email, res) => {
 
     SendEmail({
       emails: [email],
-      purpose: "forgot-password",
-      link: `${process.env.FORGOT_PASSWORD_URL}?token=${resetToken}`,
-      subject: ForgotPassword.subject,
-      text: ForgotPassword.text,
+      template: ForgotPasswordTemplate(
+        ForgotPassword.subject,
+        ForgotPassword.text,
+        `${process.env.FORGOT_PASSWORD_URL}?token=${resetToken}`
+      ),
     });
 
     return res.status(200).json({

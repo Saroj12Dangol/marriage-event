@@ -4,7 +4,20 @@ const {
   AlertInvitationEmail,
   AlertAskTravelDetail,
   TravelAgency,
+  DaysInfo,
 } = require("../../../constants/EmailContants");
+const {
+  invitationTemplate,
+} = require("../../../constants/emailTemplates/InvitationTemplate");
+const {
+  TravelDetailTemplate,
+} = require("../../../constants/emailTemplates/TravelDetailTemplate");
+const {
+  agencyTemplate,
+} = require("../../../constants/emailTemplates/agencyTemplate");
+const {
+  dayInfoTemplate,
+} = require("../../../constants/emailTemplates/dayInfoTemplate");
 const {
   purposeObj,
   eventStatusObj,
@@ -43,17 +56,16 @@ const SendEmailService = async (purpose, eventId, res) => {
       if (emails.length > 0) {
         SendEmail({
           emails,
-          subject:
-            purpose === "invitation"
+          template: invitationTemplate(
+            purpose === purposeObj.invitation
               ? InvitationEmail.subject
               : AlertInvitationEmail.subject,
-          text:
-            purpose === "invitation"
+            purpose === purposeObj.alertInvitation
               ? InvitationEmail.text
               : AlertInvitationEmail.text,
-          purpose,
-          eventId,
-          eventTitle: event.title,
+            eventId,
+            event.title
+          ),
         });
 
         emails.forEach(async (email) => {
@@ -112,17 +124,16 @@ const SendEmailService = async (purpose, eventId, res) => {
       if (emails.length > 0) {
         SendEmail({
           emails,
-          subject:
+          template: TravelDetailTemplate(
             purpose === purposeObj.askTravelDetail
               ? AskTravelDetail.subject
               : AlertAskTravelDetail.subject,
-          text:
             purpose === purposeObj.askTravelDetail
               ? AskTravelDetail.text
               : AlertAskTravelDetail.text,
-          purpose,
-          eventId,
-          eventTitle: event.title,
+            eventId,
+            event.title
+          ),
         });
 
         emails.forEach(async (email) => {
@@ -187,12 +198,12 @@ const SendEmailService = async (purpose, eventId, res) => {
       if (emails.length > 0) {
         SendEmail({
           emails,
-          subject: AskTravelDetail.subject,
-          text: AskTravelDetail.text,
-          purpose,
-          eventId,
-          eventTitle: event.title,
-          days,
+          template: dayInfoTemplate(
+            DaysInfo.subject,
+            DaysInfo.text,
+            days,
+            event.title
+          ),
         });
 
         emails.forEach(async (email) => {
@@ -240,11 +251,12 @@ const SendEmailService = async (purpose, eventId, res) => {
       if (emails) {
         SendEmail({
           emails: [emails],
-          subject: TravelAgency.subject,
-          text: TravelAgency.text,
-          purpose,
-          eventId,
-          eventTitle: event.title,
+          template: agencyTemplate(
+            TravelAgency.subject,
+            TravelAgency.text,
+            eventId,
+            event.title
+          ),
         });
 
         const notification = new NotificationModel({

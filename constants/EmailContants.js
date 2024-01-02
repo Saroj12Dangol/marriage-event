@@ -33,6 +33,11 @@ const ForgotPassword = {
   text: "Text for ask for forgot password",
 };
 
+const DaysInfo = {
+  subject: "Subject for ask for days info",
+  text: "Text for ask for days info",
+};
+
 module.exports = {
   InvitationEmail,
   AskTravelDetail,
@@ -41,4 +46,5 @@ module.exports = {
   TravelAgency,
   RoomAssigned,
   ForgotPassword,
+  DaysInfo,
 };

@@ -32,15 +32,13 @@ AgencyRouter.post("/", IsAdmin, createAgencyController);
 AgencyRouter.post("/login", LoginAgencyController);
 // =========
 
-
-
 // TODO: get agency controller
 AgencyRouter.get("/", IsAdmin, fetchAgencyController);
 
 // ===========
 
 // TODO: edit agency controller
-AgencyRouter.put("/:agencyId", IsAdmin, EditAgencyController);
+AgencyRouter.put("/:agencyId", EditAgencyController);
 
 // ===========
 

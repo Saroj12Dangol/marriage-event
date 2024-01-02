@@ -16,6 +16,7 @@ const purposeObj = {
   travelAgency: "travel-agency",
   accommodation: "accommodation", // Note: Corrected the spelling from "accommodation" to "accommodation"
   daysInformation: "days-information",
+  forgotPw: "forgot-password",
 };
 
 const eventStatusObj = {
