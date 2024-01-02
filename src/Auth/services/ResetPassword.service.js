@@ -1,4 +1,3 @@
-const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const AgencyModel = require("../../Agency/model/AgencyModel");
@@ -36,6 +35,7 @@ const ResetPasswordService = async (token, newPassword, res) => {
         });
       }
       team.password = newPassword;
+      team.resetPassword = undefined;
       await team.save();
       return res.status(201).json({
         message: "Your password has been reset",
@@ -50,6 +50,7 @@ const ResetPasswordService = async (token, newPassword, res) => {
         });
       }
       agency.password = newPassword;
+      agency.resetPassword = undefined;
       await agency.save();
       return res.status(201).json({
         message: "Your password has been reset",
