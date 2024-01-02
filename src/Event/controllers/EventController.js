@@ -20,6 +20,8 @@ const CreateEventController = async (req, res) => {
     "title",
     "description",
     "venue",
+    "brideName",
+    "groomName",
   ];
 
   const missingFields = requiredFields.filter((field) => !req.body[field]);

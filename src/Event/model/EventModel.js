@@ -24,6 +24,14 @@ const EventSchema = mongoose.Schema(
       type: String,
     },
 
+    brideName: {
+      type: String,
+    },
+
+    groomName: {
+      type: String,
+    },
+
     startDateTime: {
       type: Date,
     },
