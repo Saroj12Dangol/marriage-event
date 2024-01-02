@@ -30,7 +30,7 @@ const RoomAssignService = async (guestId, eventTitle, body, res) => {
       template: RoomBookedTemplate(
         RoomAssigned.subject,
         RoomAssigned.text,
-        guest.room,
+        guest.roomNo,
         guest.hotel,
         guest.checkInDate,
         guest.checkOutDate,
@@ -39,7 +39,7 @@ const RoomAssignService = async (guestId, eventTitle, body, res) => {
     });
 
     const notification = new NotificationModel({
-      toEmail: emails,
+      toEmail: guest.email,
       subject: RoomAssigned.subject,
       body: RoomAssigned.text,
       purpose: travelStatusObj.roomAssigned,
