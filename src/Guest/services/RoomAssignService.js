@@ -4,6 +4,7 @@ const {
 } = require("../../../constants/emailTemplates/RoomBookedTemplate");
 const { purposeObj, travelStatusObj } = require("../../../constants/statuses");
 const { SendEmail } = require("../../../utils/Email");
+const NotificationModel = require("../../Notification_Emails/model/NotificationModel");
 const GuestModel = require("../model/GuestModel");
 
 const RoomAssignService = async (guestId, eventTitle, body, res) => {
@@ -36,6 +37,16 @@ const RoomAssignService = async (guestId, eventTitle, body, res) => {
         eventTitle
       ),
     });
+
+    const notification = new NotificationModel({
+      toEmail: emails,
+      subject: RoomAssigned.subject,
+      body: RoomAssigned.text,
+      purpose: travelStatusObj.roomAssigned,
+      to: "Guest",
+    });
+
+    await notification.save();
 
     return res.status(200).json({
       data: updatedGuest,
