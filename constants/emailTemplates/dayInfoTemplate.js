@@ -1,5 +1,5 @@
 // HTML email template
-const dayInfoTemplate = (subject, text, link) => `
+const dayInfoTemplate = (subject, text, days, eventTitle) => `
 <!DOCTYPE html>
 <html lang="en">
 <head>

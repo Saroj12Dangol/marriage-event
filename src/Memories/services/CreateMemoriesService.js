@@ -4,6 +4,8 @@ const MediaModel = require("../../Media/model/MediaModel");
 const MemoriesModel = require("../model/MemoriesModel");
 
 const CreateMemoriesService = async (eventId, req, res) => {
+  // TODO: if a guest added memories multiple times for same day, only the images are added not a memory created again
+  // TODO: but if a guest added memories for different day then separate memory is created
   try {
     const event = await EventModel.findById(eventId);
 
@@ -13,6 +15,11 @@ const CreateMemoriesService = async (eventId, req, res) => {
       });
     }
 
+    const memory = await MemoriesModel.find({
+      day: req.body.day,
+      guest: req.guest._id,
+    });
+
     let images = [];
 
     for (const image of req.files.images) {
@@ -20,8 +27,17 @@ const CreateMemoriesService = async (eventId, req, res) => {
       const imageResponse = new MediaModel({
         image: img,
       });
-      imageResponse.save();
+      await imageResponse.save();
       images.push(imageResponse._id);
+    }
+
+    if (memory.length > 0) {
+      memory[0].images.push([...images]);
+      const updatedMemory = await memory[0].save();
+
+      return res.status(200).json({
+        data: updatedMemory,
+      });
     }
 
     const memories = new MemoriesModel({

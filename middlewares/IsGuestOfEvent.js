@@ -1,7 +1,6 @@
 const { EventModel } = require("../src/Event/model/EventModel");
 
 const IsGuestOfEvent = async (req, res, next) => {
-  console.log(req.file, "file");
 
   const { eventId, guestId = undefined } = req.params; //guestId for room allocation
   const { email } = req.body;

@@ -2,7 +2,7 @@ const { RoomAssigned } = require("../../../constants/EmailContants");
 const {
   RoomBookedTemplate,
 } = require("../../../constants/emailTemplates/RoomBookedTemplate");
-const { travelStatusObj } = require("../../../constants/statuses");
+const { travelStatusObj, purposeObj } = require("../../../constants/statuses");
 const { SendEmail } = require("../../../utils/Email");
 const NotificationModel = require("../../Notification_Emails/model/NotificationModel");
 const GuestModel = require("../model/GuestModel");
@@ -42,7 +42,7 @@ const RoomAssignService = async (guestId, eventTitle, body, res) => {
       toEmail: guest.email,
       subject: RoomAssigned.subject,
       body: RoomAssigned.text,
-      purpose: travelStatusObj.roomAssigned,
+      purpose: purposeObj.accommodation,
       to: "Guest",
     });
 
