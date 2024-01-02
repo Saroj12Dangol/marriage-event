@@ -2,7 +2,7 @@ const { RoomAssigned } = require("../../../constants/EmailContants");
 const {
   RoomBookedTemplate,
 } = require("../../../constants/emailTemplates/RoomBookedTemplate");
-const { purposeObj, travelStatusObj } = require("../../../constants/statuses");
+const { travelStatusObj } = require("../../../constants/statuses");
 const { SendEmail } = require("../../../utils/Email");
 const NotificationModel = require("../../Notification_Emails/model/NotificationModel");
 const GuestModel = require("../model/GuestModel");

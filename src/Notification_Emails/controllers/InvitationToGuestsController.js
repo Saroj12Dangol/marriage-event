@@ -1,8 +1,14 @@
 const { purposeEnum } = require("../../../constants/enums");
-const { accommodationEmailService } = require("../services/AccommodationEmailService");
+const { page, limit } = require("../../../constants/paginationConstants");
+const {
+  accommodationEmailService,
+} = require("../services/AccommodationEmailService");
 const {
   accommodationIndividualEmailsService,
 } = require("../services/AccomodationIndividualEmail");
+const {
+  FetchNotificationService,
+} = require("../services/FetchNotificationService");
 const {
   GetDaysInfoOfEventService,
 } = require("../services/GetDaysInfoOfEventService");
@@ -12,7 +18,6 @@ const {
 const { SendEmailService } = require("../services/SendEmailService");
 
 // TODO: email controller
-
 
 // TODO:
 const SendDaysInfoEmailController = async (req, res) => {
@@ -153,9 +158,30 @@ const SendEmailController = async (req, res) => {
   SendEmailService(purpose, eventId, res);
 };
 
+// TODO: get notifications
+
+const FetchNotificationController = async (req, res) => {
+  const pg = parseInt(req.query.page) || page;
+  const lmt = parseInt(req.query.limit) || limit;
+
+  const skip = (pg - 1) * lmt;
+
+  const to = req.query.to;
+
+  let toQuery = {};
+
+
+  if (to) {
+    toQuery.to = to;
+  }
+
+  FetchNotificationService(skip, lmt, pg, toQuery, res);
+};
+
 module.exports = {
   SendEmailController,
   SendEmailIndividualController,
   SendDaysInfoEmailController,
   SendDayInfoEmailIndividualController,
+  FetchNotificationController,
 };

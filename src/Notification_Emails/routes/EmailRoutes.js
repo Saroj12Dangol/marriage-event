@@ -4,6 +4,7 @@ const {
   SendEmailIndividualController,
   SendDaysInfoEmailController,
   SendDayInfoEmailIndividualController,
+  FetchNotificationController,
 } = require("../controllers/InvitationToGuestsController");
 
 const EmailRouter = express.Router();
@@ -13,8 +14,8 @@ EmailRouter.post("/send-email/:eventId", SendEmailController);
 
 // =========
 
-// // TODO: post email in bulk controller============
-// EmailRouter.post("/send-email/bulk", SendEmailController);
+// TODO: get notifications controller============
+EmailRouter.get("/", FetchNotificationController);
 
 // // =========
 
