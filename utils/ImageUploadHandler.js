@@ -6,11 +6,22 @@ const cloudinary = require("cloudinary").v2;
 const ImageUploadHandler = async (file, res) => {
   let fileDataImage = {};
   if (file) {
+    console.log(file, "fileddddd");
     let uploadedFile;
     try {
+      let resourceType;
+
+      if (file.mimetype.startsWith("image")) {
+        resourceType = "image";
+      } else if (file.mimetype.startsWith("video")) {
+        resourceType = "video";
+      } else {
+        throw new Error("Unsupported file type");
+      }
+
       uploadedFile = await cloudinary.uploader.upload(file.path, {
-        folder: "events/",
-        resource_type: "image",
+        folder: `events/${resourceType}/`,
+        resource_type: resourceType,
       });
 
       fileDataImage = {

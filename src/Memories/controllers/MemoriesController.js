@@ -19,6 +19,8 @@ const CreateMemoriesController = (req, res) => {
     });
   }
 
+  console.log(req.files, "file");
+
   if (!req.files.images) {
     return res.status(400).json({
       message: "Atleast one image is required",

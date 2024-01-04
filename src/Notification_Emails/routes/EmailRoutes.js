@@ -1,9 +1,6 @@
 const express = require("express");
 const {
   SendEmailController,
-  SendEmailIndividualController,
-  SendDaysInfoEmailController,
-  SendDayInfoEmailIndividualController,
   FetchNotificationController,
 } = require("../controllers/InvitationToGuestsController");
 
