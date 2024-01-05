@@ -64,6 +64,11 @@ const GuestSchema = mongoose.Schema(
       ref: "TravelDetail",
     },
 
+    numberOfGuest: {
+      type: Number,
+      default: 1,
+    },
+
     // event: {
     //   type: mongoose.Schema.ObjectId,
     //   ref: "Event",
