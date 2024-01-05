@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const sideEnum = ["bride", "groom"];
+// const sideEnum = ["bride", "groom"];
 const CloseFriendsSchema = mongoose.Schema(
   {
     image: { type: mongoose.Schema.Types.ObjectId, ref: "Media" },
@@ -13,20 +13,24 @@ const CloseFriendsSchema = mongoose.Schema(
       type: String,
     },
 
-    fbLink: {
+    phone: {
       type: String,
-      default: "",
     },
 
-    instaLink: {
-      type: String,
-      default: "",
-    },
+    // fbLink: {
+    //   type: String,
+    //   default: "",
+    // },
 
-    side: {
-      type: String,
-      enum: sideEnum,
-    },
+    // instaLink: {
+    //   type: String,
+    //   default: "",
+    // },
+
+    // side: {
+    //   type: String,
+    //   enum: sideEnum,
+    // },
   },
   {
     timestamps: true,

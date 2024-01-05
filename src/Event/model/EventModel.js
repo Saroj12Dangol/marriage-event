@@ -59,13 +59,13 @@ const EventSchema = mongoose.Schema(
       },
     },
 
-    // closeFriends: {
-    //   type: [mongoose.Schema.ObjectId],
-    //   ref: "CloseFriends",
-    //   default: function () {
-    //     return [];
-    //   },
-    // },
+    closeFriends: {
+      type: [mongoose.Schema.ObjectId],
+      ref: "CloseFriends",
+      default: function () {
+        return [];
+      },
+    },
 
     status: {
       type: String,
