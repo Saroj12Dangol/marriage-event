@@ -154,8 +154,6 @@ const SendEmailService = async (purpose, eventId, res) => {
     }
     // TODO: if purpose is days information
     else if (purpose === purposeObj.daysInformation) {
-      console.log(purpose, eventId);
-
       const event = await EventModel.findById(eventId).populate({
         path: "guests",
         match: {
@@ -163,8 +161,6 @@ const SendEmailService = async (purpose, eventId, res) => {
           travelStatus: travelStatusObj.roomAssigned,
         },
       });
-
-      console.log(event, "event");
 
       if (!event) {
         return res.status(404).json({
@@ -209,22 +205,22 @@ const SendEmailService = async (purpose, eventId, res) => {
         });
       }
 
-      const updateCriteria = { _id: { $in: guestIds } };
-      const updateOperation = {
-        $set: { travelStatus: travelStatusObj.daysInformation },
-      };
+      // const updateCriteria = { _id: { $in: guestIds } };
+      // const updateOperation = {
+      //   $set: { travelStatus: travelStatusObj.daysInformation },
+      // };
 
-      const updatedGuest = await GuestModel.updateMany(
-        updateCriteria,
-        updateOperation,
-        {
-          new: true,
-        }
-      );
+      // const updatedGuest = await GuestModel.updateMany(
+      //   updateCriteria,
+      //   updateOperation,
+      //   {
+      //     new: true,
+      //   }
+      // );
 
       return res.status(200).json({
         data: emails,
-        guests: updatedGuest,
+        // guests: updatedGuest,
       });
     }
 
