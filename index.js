@@ -22,7 +22,6 @@ var cron = require("node-cron");
 // TODO: import routes ============
 const { CoupleRouter } = require("./src/Couple/routes/CoupleRoutes");
 const { EventRouter } = require("./src/Event/routes/EventRoutes");
-const { updateStatusEvent } = require("./src/Event/model/EventModel");
 const { AgencyRouter } = require("./src/Agency/routes/AgencyRoutes");
 const { MediaRouter } = require("./src/Media/routes/MediaRoutes");
 const { MemoriesRouter } = require("./src/Memories/routes/MemoriesRoute");
@@ -99,8 +98,4 @@ app.use("/v1/auth", AuthRouter);
 
 app.get("/v1", (req, res) => {
   res.send("Welcome to marriage event management");
-});
-
-cron.schedule("0 0 * * *", () => {
-  updateStatusEvent();
 });
