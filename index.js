@@ -59,7 +59,11 @@ app.use(
 // TODO: cors error
 app.use(
   cors({
-    origin: ["http://localhost:3000", "http://localhost:8000"],
+    origin: [
+      "http://localhost:3000",
+      "http://localhost:8000",
+      "https://wedding-live.vercel.app/",
+    ],
     credentials: true,
   })
 );
