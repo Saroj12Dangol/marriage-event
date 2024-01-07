@@ -61,7 +61,8 @@ app.use(
     origin: [
       "http://localhost:3000",
       "http://localhost:8000",
-      "https://wedding-live.vercel.app/",
+      "https://wedding-live.vercel.app",
+      "https://wedding-dashboard-ashen.vercel.app",
     ],
     credentials: true,
   })
