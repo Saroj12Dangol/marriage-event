@@ -3,7 +3,6 @@ const dotEnvConfig = require("dotenv").config();
 
 // TODO: import the environment variables
 const PORT = process.env.PORT;
-const HOST = process.env.HOST_DEV;
 
 // TODO: package imports==============
 
