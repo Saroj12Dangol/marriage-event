@@ -69,6 +69,10 @@ const GuestSchema = mongoose.Schema(
       default: 1,
     },
 
+    remarks: {
+      type: String,
+    },
+
     // event: {
     //   type: mongoose.Schema.ObjectId,
     //   ref: "Event",
