@@ -6,7 +6,6 @@ const cloudinary = require("cloudinary").v2;
 const ImageUploadHandler = async (file, res) => {
   let fileDataImage = {};
   if (file) {
-    console.log(file, "fileddddd");
     let uploadedFile;
     try {
       let resourceType;
