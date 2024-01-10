@@ -1,3 +1,4 @@
+const moment = require("moment");
 const {
   InvitationEmail,
   AskTravelDetail,
@@ -51,39 +52,34 @@ const SendEmailService = async (purpose, eventId, res) => {
 
       const guests = event.guests;
 
-      const emails = guests.map((g) => g.email);
+      const emails = guests.map((g) => ({
+        email: g.email,
+        name: g.name,
+      }));
 
       if (emails.length > 0) {
-        SendEmail({
-          emails,
-          template: invitationTemplate(
-            purpose === purposeObj.invitation
-              ? InvitationEmail.subject
-              : AlertInvitationEmail.subject,
-            purpose === purposeObj.alertInvitation
-              ? InvitationEmail.text
-              : AlertInvitationEmail.text,
-            eventId,
-            event.title
-          ),
-        });
-
-        emails.forEach(async (email) => {
-          const notification = new NotificationModel({
-            toEmail: email,
-            subject:
-              purpose === "invitation"
+        for (const guest of emails) {
+          await SendEmail({
+            emails: guest.email,
+            template: invitationTemplate(
+              purpose === purposeObj.invitation
                 ? InvitationEmail.subject
                 : AlertInvitationEmail.subject,
-            body:
-              purpose === "invitation"
+              purpose === purposeObj.alertInvitation
                 ? InvitationEmail.text
                 : AlertInvitationEmail.text,
-            purpose,
-            to: "Guest",
+              eventId,
+              event.title,
+              guest.name,
+              event.groomName,
+              event.brideName,
+              moment(event.startDateTime).format("YYYY-MM-DD"),
+              moment(event.startDateTime).format("HH:mm "),
+              event.venue,
+              purpose === purposeObj.alertInvitation
+            ),
           });
-          await notification.save();
-        });
+        }
       }
 
       return res.status(200).json({
@@ -110,7 +106,10 @@ const SendEmailService = async (purpose, eventId, res) => {
 
       const guests = event.guests;
 
-      const emails = guests.map((g) => g.email);
+      const emails = guests.map((g) => ({
+        email: g.email,
+        name: g.name,
+      }));
 
       const guestIds = guests.map((g) => g._id);
 
@@ -122,30 +121,28 @@ const SendEmailService = async (purpose, eventId, res) => {
       await GuestModel.updateMany(updateCriteria, updateOperation);
 
       if (emails.length > 0) {
-        SendEmail({
-          emails,
-          template: TravelDetailTemplate(
-            purpose === purposeObj.askTravelDetail
-              ? AskTravelDetail.subject
-              : AlertAskTravelDetail.subject,
-            purpose === purposeObj.askTravelDetail
-              ? AskTravelDetail.text
-              : AlertAskTravelDetail.text,
-            eventId,
-            event.title
-          ),
-        });
-
-        emails.forEach(async (email) => {
-          const notification = new NotificationModel({
-            toEmail: email,
-            subject: AskTravelDetail.subject,
-            body: AskTravelDetail.text,
-            purpose,
-            to: "Guest",
+        for (const guest of emails) {
+          await SendEmail({
+            emails: guest.email,
+            template: TravelDetailTemplate(
+              purpose === purposeObj.invitation
+                ? InvitationEmail.subject
+                : AlertInvitationEmail.subject,
+              purpose === purposeObj.alertInvitation
+                ? InvitationEmail.text
+                : AlertInvitationEmail.text,
+              eventId,
+              event.title,
+              guest.name,
+              event.groomName,
+              event.brideName,
+              moment(event.startDateTime).format("YYYY-MM-DD"),
+              moment(event.startDateTime).format("HH:mm "),
+              event.venue,
+              purpose === purposeObj.alertInvitation
+            ),
           });
-          await notification.save();
-        });
+        }
       }
 
       return res.status(200).json({
@@ -170,7 +167,10 @@ const SendEmailService = async (purpose, eventId, res) => {
 
       const guests = event.guests;
 
-      const emails = guests.map((g) => g.email);
+      const emails = guests.map((g) => ({
+        email: g.email,
+        name: g.name,
+      }));
 
       const guestIds = guests.map((g) => g._id);
 
@@ -183,26 +183,31 @@ const SendEmailService = async (purpose, eventId, res) => {
       const days = daysAndGuests.days;
 
       if (emails.length > 0) {
-        SendEmail({
-          emails,
-          template: dayInfoTemplate(
-            DaysInfo.subject,
-            DaysInfo.text,
-            days,
-            event.title
-          ),
-        });
-
-        emails.forEach(async (email) => {
-          const notification = new NotificationModel({
-            toEmail: email,
-            subject: AskTravelDetail.subject,
-            body: AskTravelDetail.text,
-            purpose,
-            to: "Guest",
+        for (const guest of emails) {
+          await SendEmail({
+            emails: guest.email,
+            template: dayInfoTemplate(
+              DaysInfo.subject,
+              DaysInfo.text,
+              days,
+              event.title,
+              guest.name,
+              event.brideName,
+              event.groomName
+            ),
           });
-          await notification.save();
-        });
+        }
+
+        // emails.forEach(async (email) => {
+        //   const notification = new NotificationModel({
+        //     toEmail: email.email,
+        //     subject: AskTravelDetail.subject,
+        //     body: AskTravelDetail.text,
+        //     purpose,
+        //     to: "Guest",
+        //   });
+        //   await notification.save();
+        // });
       }
 
       // const updateCriteria = { _id: { $in: guestIds } };

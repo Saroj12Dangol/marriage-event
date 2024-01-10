@@ -1,5 +1,13 @@
 // HTML email template
-const dayInfoTemplate = (subject, text, days, eventTitle) => `
+const dayInfoTemplate = (
+  subject,
+  text,
+  days,
+  eventTitle,
+  guestName,
+  brideName,
+  groomName
+) => `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,13 +74,13 @@ const dayInfoTemplate = (subject, text, days, eventTitle) => `
         .event-title {
             font-size: 24px;
             margin: 0;
-            color:#fff
+            color: #fff;
         }
     </style>
 </head>
 <body>
 
- <div class="event-title-container">
+    <div class="event-title-container">
         <p class="event-title">${eventTitle}</p>
     </div>
 
@@ -80,7 +88,9 @@ const dayInfoTemplate = (subject, text, days, eventTitle) => `
         <h1>${subject}</h1>
     </header>
     <div style="padding: 20px;">
-        <p>${text}</p>
+        <p>Hi ${guestName},</p>
+        <p>Welcome to the joyous occasion of celebrating the union of ${brideName} and ${groomName}. We are thrilled to have you join us on this special journey!</p>
+
         ${days
           .map(
             (day) => `
@@ -90,11 +100,23 @@ const dayInfoTemplate = (subject, text, days, eventTitle) => `
                 <div class="event-location">${day.location}</div>
                 <div class="event-date-time">${new Date(
                   day.dateTime
-                ).toLocaleString()}</div>
+                ).toLocaleString("en-US", {
+                  year: "numeric",
+                  month: "2-digit",
+                  day: "2-digit",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}</div>
             </div>
         `
           )
           .join("")}
+
+
+        <p>We look forward to sharing these beautiful moments with you. If you have any questions or need further details, feel free to reach out.</p>
+
+        <p>Best regards,</p>
+        <p>${brideName} and ${groomName}</p>
     </div>
 </body>
 </html>
