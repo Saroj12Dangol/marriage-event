@@ -75,7 +75,7 @@ GuestRouter.patch("/received/:guestId", GuestReceivedController);
 // TODO: accept the invitation
 GuestRouter.put(
   "/accept-invitation/:eventId",
-  IsGuestOfEvent,
+  // IsGuestOfEvent,
   AcceptInvitationGuestController
 );
 
