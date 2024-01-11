@@ -1,30 +1,24 @@
 const {
   CreateCloseFriendsService,
 } = require("../services/CreateCloseFriendsService");
-const { DeleteCloseFriendsService } = require("../services/DeleteCloseFriendsService");
+const {
+  DeleteCloseFriendsService,
+} = require("../services/DeleteCloseFriendsService");
 const {
   EditCloseFrienddsService,
 } = require("../services/EditCloseFriendsService");
-
-const sideEnum = ["bride", "groom"];
 
 const CreateCloseFriendsController = async (req, res) => {
   const { eventId } = req.params;
   // TODO: data validation ===========
   // Check if all required fields are present
-  const requiredFields = ["name", "relation", "side"];
+  const requiredFields = ["name", "relation"];
 
   const missingFields = requiredFields.filter((field) => !req.body[field]);
 
   if (missingFields.length > 0) {
     return res.status(400).json({
       message: `Missing required fields: ${missingFields.join(", ")}`,
-    });
-  }
-
-  if (!sideEnum.includes(req.body.side)) {
-    return res.status(400).json({
-      message: `${req.body.side} is invalid: should be ${sideEnum}`,
     });
   }
 

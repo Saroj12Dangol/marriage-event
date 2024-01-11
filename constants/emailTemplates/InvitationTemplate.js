@@ -9,7 +9,8 @@ const invitationTemplate = (
   groomName,
   startDate,
   startTime,
-  place
+  place,
+  alert
 ) => `
 <!DOCTYPE html>
 <html lang="en">
@@ -74,7 +75,6 @@ const invitationTemplate = (
     </header>
 
     <div style="padding: 20px;">
-    <h1>Alert Invitation</h1>
         <p>Hi ${guestName},</p>
         <p>${brideName} and ${groomName} are tying the knot! We want you to be a part of our special day. Your presence would mean a lot to us as we take this big step together. Looking forward to sharing this joyful moment with you.</p>
         <p>Date: ${startDate}</p>

@@ -16,21 +16,6 @@ const CloseFriendsSchema = mongoose.Schema(
     phone: {
       type: String,
     },
-
-    // fbLink: {
-    //   type: String,
-    //   default: "",
-    // },
-
-    // instaLink: {
-    //   type: String,
-    //   default: "",
-    // },
-
-    // side: {
-    //   type: String,
-    //   enum: sideEnum,
-    // },
   },
   {
     timestamps: true,
