@@ -62,6 +62,7 @@ app.use(
       "http://localhost:8000",
       "https://wedding-live.vercel.app",
       "https://wedding-dashboard-ashen.vercel.app",
+      "https://wedding-inderpreet-medha.vercel.app",
     ],
     credentials: true,
   })
