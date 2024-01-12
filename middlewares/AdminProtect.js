@@ -11,6 +11,12 @@ const IsAdmin = async (req, res, next) => {
       const { id } = jwt.verify(token, process.env.JWT_SECRET); //TODO: extract the user's id from the token from cookies.
       const team = await TeamModel.findById(id).select("-password"); //TODO: get the user from the db with id same as the user's id we just extracted from the token. if the user exists then we go to next function otherwise return the forbidden error
 
+      if (!team) {
+        return res.status(403).json({
+          error: "Not authorized token expired, login again",
+        });
+      }
+
       req.team = team;
 
       if (req.team.role !== "admin") {
