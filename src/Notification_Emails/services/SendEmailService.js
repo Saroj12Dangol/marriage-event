@@ -68,15 +68,10 @@ const SendEmailService = async (purpose, eventId, res) => {
               purpose === purposeObj.alertInvitation
                 ? InvitationEmail.text
                 : AlertInvitationEmail.text,
-              eventId,
               event.title,
               guest.name,
-              event.groomName,
               event.brideName,
-              moment(event.startDateTime).format("YYYY-MM-DD"),
-              moment(event.startDateTime).format("HH:mm "),
-              event.venue,
-              purpose === purposeObj.alertInvitation
+              event.groomName
             ),
           });
         }
@@ -127,15 +122,10 @@ const SendEmailService = async (purpose, eventId, res) => {
             emails: guest.email,
             template: TravelDetailTemplate(
               AlertAskTravelDetail.subject,
-              eventId,
               event.title,
               guest.name,
-              event.groomName,
               event.brideName,
-              moment(event.startDateTime).format("YYYY-MM-DD"),
-              moment(event.startDateTime).format("HH:mm "),
-              event.venue,
-              purpose === purposeObj.alertInvitation
+              event.groomName
             ),
           });
         }
@@ -181,10 +171,10 @@ const SendEmailService = async (purpose, eventId, res) => {
       if (emails.length > 0) {
         for (const guest of emails) {
           await SendEmail({
+            subject: DaysInfo.subject,
             emails: guest.email,
             template: dayInfoTemplate(
               DaysInfo.subject,
-              DaysInfo.text,
               days,
               event.title,
               guest.name,
@@ -193,32 +183,7 @@ const SendEmailService = async (purpose, eventId, res) => {
             ),
           });
         }
-
-        // emails.forEach(async (email) => {
-        //   const notification = new NotificationModel({
-        //     toEmail: email.email,
-        //     subject: AskTravelDetail.subject,
-        //     body: AskTravelDetail.text,
-        //     purpose,
-        //     to: "Guest",
-        //   });
-        //   await notification.save();
-        // });
       }
-
-      // const updateCriteria = { _id: { $in: guestIds } };
-      // const updateOperation = {
-      //   $set: { travelStatus: travelStatusObj.daysInformation },
-      // };
-
-      // const updatedGuest = await GuestModel.updateMany(
-      //   updateCriteria,
-      //   updateOperation,
-      //   {
-      //     new: true,
-      //   }
-      // );
-
       return res.status(200).json({
         data: emails,
         // guests: updatedGuest,

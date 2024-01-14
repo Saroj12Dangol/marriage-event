@@ -1,6 +1,11 @@
 const mailer = require("nodemailer");
 
-const SendEmail = async ({ emails, subject, text, template }) => {
+const SendEmail = async ({
+  emails,
+  subject = "Invitation to Celebrate Medha and Inderpreet's Wedding!",
+  text,
+  template,
+}) => {
   var mail_transport_mail_transport = mailer.createTransport({
     host: process.env.EMAIL_HOST,
     auth: {

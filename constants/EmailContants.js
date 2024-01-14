@@ -34,7 +34,7 @@ const ForgotPassword = {
 };
 
 const DaysInfo = {
-  subject: "Subject for ask for days info",
+  subject: "Event days information",
   text: "Text for ask for days info",
 };
 

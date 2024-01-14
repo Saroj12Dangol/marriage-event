@@ -1,7 +1,6 @@
 // HTML email template
 const dayInfoTemplate = (
   subject,
-  text,
   days,
   eventTitle,
   guestName,
@@ -115,7 +114,7 @@ const dayInfoTemplate = (
 
         <p>We look forward to sharing these beautiful moments with you. If you have any questions or need further details, feel free to reach out.</p>
 
-        <p>Best regards,</p>
+        <p>Warm regards</p>
         <p>${brideName} and ${groomName}</p>
     </div>
 </body>

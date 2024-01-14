@@ -1,16 +1,10 @@
 // HTML email template
 const invitationTemplate = (
-  subject,
-  text,
-  eventId,
+  subject = "Invitation to Celebrate Medha and Inderpreet's Wedding!",
   eventTitle,
   guestName,
   brideName,
-  groomName,
-  startDate,
-  startTime,
-  place,
-  alert
+  groomName
 ) => `
 <!DOCTYPE html>
 <html lang="en">
@@ -76,16 +70,32 @@ const invitationTemplate = (
 
     <div style="padding: 20px;">
         <p>Hi ${guestName},</p>
-        <p>${brideName} and ${groomName} are tying the knot! We want you to be a part of our special day. Your presence would mean a lot to us as we take this big step together. Looking forward to sharing this joyful moment with you.</p>
-        <p>Date: ${startDate}</p>
-        <p>Time: ${startTime}</p>
-        <p>Place: ${place}</p>
-        <p>We're planning a day filled with love and laughter, and we'd love for you to join us. Please let us know if you can make it by ${startDate} ${startTime}.</p>
-        <a href="${process.env.INVITATION_URL}/${eventId}#rsvp" style="text-decoration: none;">Accept Invitation</a>
 
-        <p>After accepting the invitation, kindly provide your travel details <a href="${process.env.TRAVEL_DETAIL_URL}/${eventId}">here</a>.</p>
+        
+        <p>
+        We hope this message finds you well. Exciting news – ${brideName} and ${groomName} are taking the plunge into marital bliss! In celebrating this joyous occasion, we would be honored to have you join us on our special day. Your presence holds great significance for us as we embark on this remarkable journey together.
+        </p>
+        <p>Save the Date: 7th March to 9th March</p>
+        <p>Venue: Godavari Resort, Kathmandu</p>
+        <p>
+        Our wedding promises to be a beautiful blend of love and laughter, and we sincerely wish for you to be a part of the festivities. Kindly let us know by 20th January 2024 if you can share in this joyous moment with us.</p>
+        <p>
 
-        <p>Best, ${brideName} and ${groomName}</p>
+        Please confirm your attendance and provide your RSVP along with travel details via our dedicated website: <a href="${process.env.INVITATION_URL}">www.indha.com.au</a>
+        </p>
+
+        <br/>
+        <p>
+        To ensure your convenience, we would also appreciate it if you could provide your travel details on our website. This will assist us in arranging for your airport transportation, making your journey to and from the celebration as seamless as possible.
+        </p>
+
+        <p>
+        Looking forward to celebrating this joyous occasion with you!
+        </p>
+
+
+        <p>Warm regards</p>
+        <p>${brideName} and ${groomName}</p>
 
     </div>
 </body>

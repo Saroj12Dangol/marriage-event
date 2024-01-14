@@ -1,14 +1,10 @@
 // HTML email template
 const TravelDetailTemplate = (
-  subject,
-  eventId,
+  subject = "Invitation to Celebrate Medha and Inderpreet's Wedding!",
   eventTitle,
   guestName,
   brideName,
-  groomName,
-  startDate,
-  startTime,
-  place
+  groomName
 ) => `
 <!DOCTYPE html>
 <html lang="en">
@@ -74,22 +70,21 @@ const TravelDetailTemplate = (
 
     <div style="padding: 20px;">
        
-        <h1>Please provide travel details.</h1>
-        <p>Hi ${guestName},</p>
-        <p>${brideName} and ${groomName} are tying the knot! We want you to be a part of our special day. Your presence would mean a lot to us as we take this big step together. Looking forward to sharing this joyful moment with you.</p>
-        <p>Date: ${startDate}</p>
-        <p>Time: ${startTime}</p>
-        <p>Place: ${place}</p>
-        <p>We're planning a day filled with love and laughter, and we'd love for you to join us. Please let us know if you can make it by ${startDate} ${startTime}.</p>
+        <p>Dear ${guestName},</p>
+        <p>We hope this message finds you well. ${brideName} and ${groomName} are thrilled to announce their upcoming wedding, and we would be honoured to have you share in the joy of our special day.</p>
+        <p>If you haven't already, kindly RSVP through our website at <a href="${process.env.INVITATION_URL}">www.indha.com.au</a> Your prompt response would be greatly appreciated. </p>
+       
+        <br/>
+        <p>To ensure your convenience, we would also appreciate it if you could provide your travel details on our website. This will assist us in arranging for your airport transportation, making your journey to and from the celebration as seamless as possible.</p> 
+    
+        <p>
+        Looking forward to celebrating this joyous occasion with you!
+        </p>
 
 
-        <p>Kindly provide your travel details <a href="${process.env.TRAVEL_DETAIL_URL}/${eventId}">here</a>.</p>
-
-        <h3>This is a travel detail alert message. Please provide your travel details as soon as possible.</h3>
-            
-        <p>Best </p>
+        <p>Warm regards</p>
         <p>${brideName} and ${groomName}</p>
-        
+
     </div>
 </body>
 </html>
