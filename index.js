@@ -63,6 +63,8 @@ app.use(
       "https://wedding-live.vercel.app",
       "https://wedding-dashboard-ashen.vercel.app",
       "https://wedding-inderpreet-medha.vercel.app",
+      "https://indha.com.au",
+      "https://app.indha.com.au",
     ],
     credentials: true,
   })
