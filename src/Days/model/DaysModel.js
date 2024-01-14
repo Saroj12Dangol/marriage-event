@@ -15,6 +15,18 @@ const DaysSchema = mongoose.Schema(
       type: String,
     },
 
+    dressCode: {
+      type: String,
+    },
+
+    theme: {
+      type: String,
+    },
+
+    area: {
+      type: String,
+    },
+
     location: {
       type: String,
     },

@@ -1,7 +1,6 @@
 // HTML email template
 const TravelDetailTemplate = (
   subject,
-  text,
   eventId,
   eventTitle,
   guestName,
@@ -88,7 +87,8 @@ const TravelDetailTemplate = (
 
         <h3>This is a travel detail alert message. Please provide your travel details as soon as possible.</h3>
             
-        <p>Best, ${brideName} and ${groomName}</p>
+        <p>Best </p>
+        <p>${brideName} and ${groomName}</p>
         
     </div>
 </body>

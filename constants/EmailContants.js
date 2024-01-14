@@ -1,10 +1,10 @@
 const InvitationEmail = {
-  subject: "Subject for invitation",
+  subject: "Invitation Email",
   text: "text for invitation",
 };
 
 const AlertInvitationEmail = {
-  subject: "Alert Subject for invitation",
+  subject: "Alert Invitation",
   text: "Alert text for invitation",
 };
 
@@ -14,7 +14,7 @@ const AskTravelDetail = {
 };
 
 const AlertAskTravelDetail = {
-  subject: "Subject for ask for event details",
+  subject: "Travel Detail",
   text: "Text for ask for event details",
 };
 

@@ -81,10 +81,9 @@ const invitationTemplate = (
         <p>Time: ${startTime}</p>
         <p>Place: ${place}</p>
         <p>We're planning a day filled with love and laughter, and we'd love for you to join us. Please let us know if you can make it by ${startDate} ${startTime}.</p>
-        <a href="${process.env.INVITATION_URL}/${eventId}" style="text-decoration: none;">Accept Invitation</a>
+        <a href="${process.env.INVITATION_URL}/${eventId}#rsvp" style="text-decoration: none;">Accept Invitation</a>
 
         <p>After accepting the invitation, kindly provide your travel details <a href="${process.env.TRAVEL_DETAIL_URL}/${eventId}">here</a>.</p>
-
 
         <p>Best, ${brideName} and ${groomName}</p>
 

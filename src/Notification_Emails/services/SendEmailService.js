@@ -114,6 +114,7 @@ const SendEmailService = async (purpose, eventId, res) => {
       const guestIds = guests.map((g) => g._id);
 
       const updateCriteria = { _id: { $in: guestIds } };
+
       const updateOperation = {
         $set: { travelStatus: travelStatusObj.travelDetailAsked },
       };
@@ -125,12 +126,7 @@ const SendEmailService = async (purpose, eventId, res) => {
           await SendEmail({
             emails: guest.email,
             template: TravelDetailTemplate(
-              purpose === purposeObj.invitation
-                ? InvitationEmail.subject
-                : AlertInvitationEmail.subject,
-              purpose === purposeObj.alertInvitation
-                ? InvitationEmail.text
-                : AlertInvitationEmail.text,
+              AlertAskTravelDetail.subject,
               eventId,
               event.title,
               guest.name,
