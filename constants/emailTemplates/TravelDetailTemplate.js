@@ -35,17 +35,7 @@ const TravelDetailTemplate = (
             text-align: justify;
             margin-bottom: 15px;
         }
-        a {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #3498db;
-            color: #ffffff;
-            text-decoration: none;
-            border-radius: 5px;
-            border: 2px solid #3498db;
-            box-shadow: 2px 2px 5px #888888;
-            margin-top: 30px;
-        }
+      
         .event-title-container {
             background-color: #2c3e50;
             color: #ffffff;
