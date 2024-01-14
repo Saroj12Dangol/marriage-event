@@ -54,9 +54,6 @@ const TravelDetailTemplate = (
     <div class="event-title-container">
         <p class="event-title">${eventTitle}</p>
     </div>
-    <header>
-        <h1>${subject}</h1>
-    </header>
 
     <div style="padding: 20px;">
        
