@@ -13,16 +13,16 @@ const CreateCloseFriendsService = async (eventId, body, file, res) => {
       });
     }
 
-    const img = await ImageUploadHandler(file, res);
-    const imageResponse = new MediaModel({
-      image: img,
-    });
+    // const img = await ImageUploadHandler(file, res);
+    // const imageResponse = new MediaModel({
+    //   image: img,
+    // });
 
-    await imageResponse.save();
+    // await imageResponse.save();
 
     const closeFriend = new CloseFriendsModel({ ...body });
 
-    closeFriend.image = imageResponse._id;
+    // closeFriend.image = imageResponse._id;
 
     await closeFriend.save();
 
