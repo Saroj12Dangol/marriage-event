@@ -1,20 +1,20 @@
 const InvitationEmail = {
-  subject: "Invitation Email",
+  subject: "Invitation to Celebrate Medha and Inderpreet's Wedding!",
   text: "text for invitation",
 };
 
 const AlertInvitationEmail = {
-  subject: "Alert Invitation",
+  subject: "Invitation to Celebrate Medha and Inderpreet's Wedding!",
   text: "Alert text for invitation",
 };
 
 const AskTravelDetail = {
-  subject: "Subject for ask for event details",
+  subject: "Invitation to Celebrate Medha and Inderpreet's Wedding!",
   text: "Text for ask for event details",
 };
 
 const AlertAskTravelDetail = {
-  subject: "Travel Detail",
+  subject: "Invitation to Celebrate Medha and Inderpreet's Wedding!",
   text: "Text for ask for event details",
 };
 

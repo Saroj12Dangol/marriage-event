@@ -69,7 +69,7 @@ const invitationTemplate = (
     </header>
 
     <div style="padding: 20px;">
-        <p>Hi ${guestName},</p>
+        <p>Dear ${guestName},</p>
 
         
         <p>

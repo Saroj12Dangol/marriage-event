@@ -65,9 +65,6 @@ const SendEmailService = async (purpose, eventId, res) => {
               purpose === purposeObj.invitation
                 ? InvitationEmail.subject
                 : AlertInvitationEmail.subject,
-              purpose === purposeObj.alertInvitation
-                ? InvitationEmail.text
-                : AlertInvitationEmail.text,
               event.title,
               guest.name,
               event.brideName,
