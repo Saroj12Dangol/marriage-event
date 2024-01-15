@@ -1,7 +1,6 @@
 const { EventModel } = require("../src/Event/model/EventModel");
 
 const IsGuestOfEvent = async (req, res, next) => {
-
   const { eventId, guestId = undefined } = req.params; //guestId for room allocation
   const { email } = req.body;
 
@@ -27,7 +26,9 @@ const IsGuestOfEvent = async (req, res, next) => {
 
     if (event.guests.length === 0) {
       return res.status(404).json({
-        message: `${req.body.email || guestId} is not valid for this event.`,
+        message: `${
+          req.body.email || guestId
+        } is not valid for this event. Accept the Invitation first.`,
       });
     }
 
