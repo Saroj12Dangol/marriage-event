@@ -33,7 +33,7 @@ const RoomBookedTemplate = (
             color: #2c3e50;
         }
         p {
-            color: #fff;
+            color: #000;
             font-size: 16px;
             line-height: 1.6;
         }
@@ -46,7 +46,7 @@ const RoomBookedTemplate = (
         .booking-details {
             font-size: 18px;
             margin: 0;
-            color:'#fff'
+            color:#fff
         }
     </style>
 </head>
