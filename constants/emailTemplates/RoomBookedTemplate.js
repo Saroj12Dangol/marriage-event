@@ -46,12 +46,13 @@ const RoomBookedTemplate = (
         .booking-details {
             font-size: 18px;
             margin: 0;
+            color:'#fff'
         }
     </style>
 </head>
 <body>
     <div class="booking-details-container">
-        <p class="booking-details">Booking Confirmation for ${eventTitle}</p>
+        <p class="booking-details">${eventTitle}</p>
     </div>
     <div style="padding: 20px;">
         <p>Dear ${guestName},</p>
