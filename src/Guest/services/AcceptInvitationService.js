@@ -48,6 +48,7 @@ const AcceptInvitationService = async (req, res) => {
           await SendEmail({
             emails: email,
             template: confirmationTemplate(
+              eventId,
               "Thank you for accepting the invitation.",
               event.title,
               guest.name,
