@@ -109,6 +109,7 @@ const SendEmailService = async (purpose, eventId, res) => {
 
       const updateOperation = {
         $set: { travelStatus: travelStatusObj.travelDetailAsked },
+        $inc: { TDCount: 1 }, // Increment TDcount by 1
       };
 
       await GuestModel.updateMany(updateCriteria, updateOperation);
@@ -222,14 +223,14 @@ const SendEmailService = async (purpose, eventId, res) => {
           ),
         });
 
-        const notification = new NotificationModel({
-          toEmail: emails,
-          subject: TravelAgency.subject,
-          body: TravelAgency.text,
-          purpose,
-          to: "Agency",
-        });
-        await notification.save();
+        // const notification = new NotificationModel({
+        //   toEmail: emails,
+        //   subject: TravelAgency.subject,
+        //   body: TravelAgency.text,
+        //   purpose,
+        //   to: "Agency",
+        // });
+        // await notification.save();
       }
 
       const updateCriteria = { _id: { $in: guestIds } };

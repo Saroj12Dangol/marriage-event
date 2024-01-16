@@ -69,6 +69,11 @@ const GuestSchema = mongoose.Schema(
       default: 1,
     },
 
+    TDCount: {
+      type: Number,
+      default: 0,
+    },
+
     remarks: {
       type: String,
     },

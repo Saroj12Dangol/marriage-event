@@ -1,4 +1,8 @@
+const {
+  confirmationTemplate,
+} = require("../../../constants/emailTemplates/confirmationTemplate");
 const { eventStatusObj } = require("../../../constants/statuses");
+const { SendEmail } = require("../../../utils/Email");
 const { EventModel } = require("../../Event/model/EventModel");
 const GuestModel = require("../model/GuestModel");
 
@@ -41,16 +45,42 @@ const AcceptInvitationService = async (req, res) => {
 
           await event.save();
 
+          await SendEmail({
+            emails: email,
+            template: confirmationTemplate(
+              "Thank you for accepting the invitation.",
+              event.title,
+              guest.name,
+              event.brideName,
+              event.groomName
+            ),
+          });
+
           return res.status(200).json({
             data: guest,
-            new: "new",
           });
         }
       }
     } else {
+      const event = await EventModel.findById(eventId).populate("guests");
+      if (!event) {
+        return res.status(404).json({
+          message: `${eventId} event is not found.`,
+        });
+      }
+      await SendEmail({
+        subject: "Thank you for accepting the invitation.",
+        emails: email,
+        template: confirmationTemplate(
+          "Thank you for accepting the invitation.",
+          event.title,
+          guest.name,
+          event.brideName,
+          event.groomName
+        ),
+      });
       return res.status(200).json({
         data: guest,
-        old: "old",
       });
     }
   } catch (error) {

@@ -1,3 +1,5 @@
+const moment = require("moment");
+
 // HTML email template
 const dayInfoTemplate = (
   subject,
@@ -83,9 +85,6 @@ const dayInfoTemplate = (
         <p class="event-title">${eventTitle}</p>
     </div>
 
-    <header>
-        <h1>${subject}</h1>
-    </header>
     <div style="padding: 20px;">
         <p>Hi ${guestName},</p>
         <p>Welcome to the joyous occasion of celebrating the union of ${brideName} and ${groomName}. We are thrilled to have you join us on this special journey!</p>
@@ -97,15 +96,10 @@ const dayInfoTemplate = (
                 <div class="day-title">${day.title}</div>
                 <div class="event-description">${day.description}</div>
                 <div class="event-location">${day.location}</div>
-                <div class="event-date-time">${new Date(
-                  day.dateTime
-                ).toLocaleString("en-US", {
-                  year: "numeric",
-                  month: "2-digit",
-                  day: "2-digit",
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}</div>
+                <div class="event-date-time">${moment
+                  .utc(day.dateTime)
+                  .format("dddd, MMMM D, YYYY, h:mm A")}
+                   </div>
             </div>
         `
           )

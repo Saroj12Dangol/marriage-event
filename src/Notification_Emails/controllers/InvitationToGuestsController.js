@@ -64,14 +64,7 @@ const SendDaysInfoEmailController = async (req, res) => {
 
 // TODO: send email individually
 const SendEmailIndividualController = async (req, res) => {
-  const requiredFields = [
-    "subject",
-    "text",
-    "purpose",
-    "to",
-    "emails",
-    "event",
-  ];
+  const requiredFields = ["purpose", "emails"];
 
   const missingFields = requiredFields.filter((field) => !req.body[field]);
 
@@ -82,7 +75,8 @@ const SendEmailIndividualController = async (req, res) => {
     });
   }
 
-  const { to, subject, text, purpose, emails, event } = req.body;
+  const { purpose, emails } = req.body;
+  const { eventId } = req.params;
 
   if (!purposeEnum.includes(purpose)) {
     return res.status(400).json({
@@ -91,13 +85,10 @@ const SendEmailIndividualController = async (req, res) => {
   }
 
   await IndividualEmailsService({
-    to,
-    subject,
-    text,
     purpose,
-    res,
     emails,
-    event,
+    event: eventId,
+    res,
   });
 };
 
@@ -169,7 +160,6 @@ const FetchNotificationController = async (req, res) => {
   const to = req.query.to;
 
   let toQuery = {};
-
 
   if (to) {
     toQuery.to = to;
