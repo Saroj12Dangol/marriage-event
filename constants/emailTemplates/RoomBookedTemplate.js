@@ -1,3 +1,5 @@
+const moment = require("moment");
+
 // HTML email template for room booking confirmation
 const RoomBookedTemplate = (
   subject,
@@ -22,20 +24,21 @@ const RoomBookedTemplate = (
             background-color: #f4f4f4;
         }
         header {
-            background-color: #3498db;
+            background-color: #2c3e50;
             color: #ffffff;
             text-align: center;
             padding: 10px;
         }
         h1 {
-            color: #3498db;
+            color: #2c3e50;
         }
         p {
             color: #555555;
             font-size: 16px;
+            line-height: 1.6;
         }
         .booking-details-container {
-            background-color: #3498db;
+            background-color: #2c3e50;
             color: #ffffff;
             text-align: center;
             padding: 10px;
@@ -50,15 +53,18 @@ const RoomBookedTemplate = (
     <div class="booking-details-container">
         <p class="booking-details">Booking Confirmation for ${eventTitle}</p>
     </div>
-    <header>
-        <h1>${subject}</h1>
-    </header>
     <div style="padding: 20px;">
-        <p>Hello ${guestName},</p>
-        <p>Your room (${room}) at ${hotel} has been booked successfully.</p>
-        <p>Check-in Date: ${checkInDate}</p>
-        <p>Check-out Date: ${checkOutDate}</p>
-        <p>For any inquiries, please contact our customer service.</p>
+        <p>Dear ${guestName},</p>
+        <p>We are delighted to inform you that your reservation for room ${room} at ${hotel} has been successfully confirmed.</p>
+        <p>Check-in Date: ${moment
+          .utc(checkInDate)
+          .format("dddd, MMMM D, YYYY, h:mm A")}</p>
+        <p>Check-out Date: ${moment
+          .utc(checkOutDate)
+          .format("dddd, MMMM D, YYYY, h:mm A")}</p>
+        <p>If you have any inquiries, please do not hesitate to contact our dedicated support team through the <a href="${
+          process.env.INVITATION_URL
+        }>indha.com.au</a>.</p>
     </div>
 </body>
 </html>

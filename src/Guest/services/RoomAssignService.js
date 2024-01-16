@@ -26,10 +26,11 @@ const RoomAssignService = async (guestId, eventTitle, body, res) => {
     const updatedGuest = await guest.save();
 
     SendEmail({
+      subject: "Room booking",
       emails: guest.email,
       template: RoomBookedTemplate(
         RoomAssigned.subject,
-        RoomAssigned.text,
+        guest.name,
         guest.roomNo,
         guest.hotel,
         guest.checkInDate,
