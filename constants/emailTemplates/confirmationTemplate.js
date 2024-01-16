@@ -59,7 +59,7 @@ const confirmationTemplate = (
     <div style="padding: 20px;">
         <p>Dear ${guestName},</p>
 
-    
+<p>    
 Thank you for accepting the invitation.
 </p>
 
