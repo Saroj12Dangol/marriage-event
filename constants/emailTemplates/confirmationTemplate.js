@@ -1,5 +1,6 @@
 // HTML email template
 const confirmationTemplate = (
+  eventId,
   subject = "Invitation to Celebrate Medha and Inderpreet's Wedding!",
   eventTitle,
   guestName,
@@ -63,7 +64,7 @@ const confirmationTemplate = (
 Thank you for accepting the invitation.
 </p>
 
-    <p>Now second step, please fill your travel information by clicking on 'Send Travel Detail'. 
+    <p>Now second step, please fill your travel information by clicking on <a href="${process.env.TRAVEL_DETAIL_URL}/${eventId}">Send travel detail</a>. 
     </p>
     <p>
     If you have not already booked your flight, don't worry, we will send you a reminder email for travel detail in few days  

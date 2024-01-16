@@ -72,6 +72,7 @@ const AcceptInvitationService = async (req, res) => {
         subject: "Thank you for accepting the invitation.",
         emails: email,
         template: confirmationTemplate(
+          eventId,
           "Thank you for accepting the invitation.",
           event.title,
           guest.name,
