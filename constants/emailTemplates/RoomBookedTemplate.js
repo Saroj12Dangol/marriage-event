@@ -64,7 +64,7 @@ const RoomBookedTemplate = (
           .format("dddd, MMMM D, YYYY, h:mm A")}</p>
         <p>If you have any inquiries, please do not hesitate to contact our dedicated support team through the <a href="${
           process.env.INVITATION_URL
-        }>indha.com.au</a>.</p>
+        }/#contact">indha.com.au</a>.</p>
     </div>
 </body>
 </html>
