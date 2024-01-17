@@ -6,6 +6,7 @@ const storage = multer.diskStorage({
   //   cb(null, "uploads");
   // },
   filename: function (req, file, cb) {
+    console.log(file, "fileeeeeeeeee");
     // toISOString() => method is used to convert the given date object's contents into a string in ISO format (ISO 8601).
     cb(
       null,

@@ -4,10 +4,7 @@ const {
 
 const CreateTravelDetailsController = (req, res) => {
   console.log(req.file, req.body);
-  return res.json({
-    file: req.file,
-    body: req.body,
-  });
+
   const { eventId } = req.params;
 
   // TODO: data validation ===========
