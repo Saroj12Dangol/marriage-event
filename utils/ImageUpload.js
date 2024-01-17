@@ -30,9 +30,6 @@ function fileFilter(req, file, cb) {
 const upload = multer({
   storage,
   fileFilter,
-  limits: {
-    fileSize: 20337697, // Set your own file size limit
-  },
 });
 
 // File size formatter (copy-paste)
