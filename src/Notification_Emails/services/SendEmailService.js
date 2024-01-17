@@ -85,10 +85,10 @@ const SendEmailService = async (purpose, eventId, res) => {
     ) {
       const event = await EventModel.findById(eventId).populate({
         path: "guests",
-        $or: [
-          { travelStatus: travelStatusObj.pending },
-          { travelStatus: travelStatusObj.travelDetailAsked },
-        ],
+        match: {
+          eventStatus: eventStatusObj.accept,
+          travelStatus: travelStatusObj.pending,
+        },
       });
 
       if (!event) {
