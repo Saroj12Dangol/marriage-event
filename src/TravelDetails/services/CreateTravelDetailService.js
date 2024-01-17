@@ -34,9 +34,9 @@ const CreateTravelDetailService = async (req, eventId, file, res) => {
     guest.travelDetail = savedTravelDetail._id;
 
     // TODO: update travel status
-    if (!guest.travelDetail) {
-      guest.travelStatus = travelStatusObj.travelDetailReceived;
-    }
+    // if (!guest.travelDetail) {
+    guest.travelStatus = travelStatusObj.travelDetailReceived;
+    // }
 
     await guest.save();
 
