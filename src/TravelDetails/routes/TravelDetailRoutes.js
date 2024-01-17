@@ -2,6 +2,7 @@ const express = require("express");
 const { upload } = require("../../../utils/ImageUpload");
 const {
   CreateTravelDetailsController,
+  UpdateTravelDetailsController,
 } = require("../controllers/TravelDetailController");
 const { IsGuestOfEvent } = require("../../../middlewares/IsGuestOfEvent");
 
@@ -13,6 +14,13 @@ TravelRouter.post(
   upload.single("ticketImage"),
   IsGuestOfEvent,
   CreateTravelDetailsController
+);
+
+TravelRouter.put(
+  "/:travelId",
+  upload.single("ticketImage"),
+  // IsGuestOfEvent,
+  UpdateTravelDetailsController
 );
 
 // ===========

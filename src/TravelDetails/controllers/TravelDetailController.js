@@ -1,6 +1,9 @@
 const {
   CreateTravelDetailService,
 } = require("../services/CreateTravelDetailService");
+const {
+  UpdateTravelDetailService,
+} = require("../services/UpdateTravelDetailService");
 
 const CreateTravelDetailsController = (req, res) => {
   const { eventId } = req.params;
@@ -44,6 +47,20 @@ const CreateTravelDetailsController = (req, res) => {
   CreateTravelDetailService(req, eventId, file, res);
 };
 
+// TODO: update travel detail
+const UpdateTravelDetailsController = (req, res) => {
+  const { travelId } = req.params;
+
+  const { file } = req;
+  if (!file) {
+    return res.status(400).json({
+      message: "Image is required",
+    });
+  }
+
+  UpdateTravelDetailService(travelId, req.file, req.body, res);
+};
 module.exports = {
   CreateTravelDetailsController,
+  UpdateTravelDetailsController,
 };
