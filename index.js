@@ -65,6 +65,7 @@ app.use(
       "https://wedding-inderpreet-medha.vercel.app",
       "https://indha.com.au",
       "https://app.indha.com.au",
+      "http://192.168.16.106:3000",
     ],
     credentials: true,
   })

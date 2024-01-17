@@ -39,15 +39,15 @@ const RoomAssignService = async (guestId, eventTitle, body, res) => {
       ),
     });
 
-    const notification = new NotificationModel({
-      toEmail: guest.email,
-      subject: RoomAssigned.subject,
-      body: RoomAssigned.text,
-      purpose: purposeObj.accommodation,
-      to: "Guest",
-    });
+    // const notification = new NotificationModel({
+    //   toEmail: guest.email,
+    //   subject: RoomAssigned.subject,
+    //   body: RoomAssigned.text,
+    //   purpose: purposeObj.accommodation,
+    //   to: "Guest",
+    // });
 
-    await notification.save();
+    // await notification.save();
 
     return res.status(200).json({
       data: updatedGuest,

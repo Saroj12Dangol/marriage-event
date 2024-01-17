@@ -35,11 +35,14 @@ const CreateTravelDetailsController = (req, res) => {
   }
 
   const { file } = req;
+
   if (!file) {
     return res.status(400).json({
       message: "Image is required",
     });
   }
+
+  console.log(file, "file");
 
   CreateTravelDetailService(req, eventId, file, res);
 };
