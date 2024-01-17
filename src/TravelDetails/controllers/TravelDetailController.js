@@ -3,6 +3,11 @@ const {
 } = require("../services/CreateTravelDetailService");
 
 const CreateTravelDetailsController = (req, res) => {
+  console.log(req.file, req.body);
+  return res.json({
+    file: req.file,
+    body: req.body,
+  });
   const { eventId } = req.params;
 
   // TODO: data validation ===========
@@ -41,8 +46,6 @@ const CreateTravelDetailsController = (req, res) => {
       message: "Image is required",
     });
   }
-
-  console.log(file, "file");
 
   CreateTravelDetailService(req, eventId, file, res);
 };
