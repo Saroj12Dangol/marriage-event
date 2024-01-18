@@ -50,7 +50,7 @@ GuestRouter.delete("/:guestId", IsAdmin, DeleteGuestController);
 
 // TODO: edit guest Router
 
-GuestRouter.put("/:guestId", IsAdmin, EditGuestController);
+GuestRouter.put("/:guestId", EditGuestController);
 
 GuestRouter.patch(
   "/toggle-event-status/:guestId",
