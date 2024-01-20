@@ -234,12 +234,12 @@ const SendEmailService = async (purpose, eventId, res) => {
         // await notification.save();
       }
 
-      const updateCriteria = { _id: { $in: guestIds } };
-      const updateOperation = {
-        $set: { travelStatus: travelStatusObj.askedToAgent },
-      };
+      // const updateCriteria = { _id: { $in: guestIds } };
+      // const updateOperation = {
+      // $set: { travelStatus: travelStatusObj.askedToAgent },
+      // };
 
-      await GuestModel.updateMany(updateCriteria, updateOperation);
+      // await GuestModel.updateMany(updateCriteria, updateOperation);
 
       return res.status(200).json({
         emails,
