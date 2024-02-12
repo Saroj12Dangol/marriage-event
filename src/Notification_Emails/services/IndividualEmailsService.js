@@ -57,7 +57,8 @@ const IndividualEmailsService = async ({ purpose, res, emails, event }) => {
               eventDetail.title,
               guest.name,
               eventDetail.brideName,
-              eventDetail.groomName
+              eventDetail.groomName,
+              eventDetail._id
             ),
           });
         }
